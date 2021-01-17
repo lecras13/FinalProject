@@ -21,13 +21,11 @@ import static java.util.Optional.of;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-
 public class UserServiceImplTest {
     private static final Long ID = 1L;
     private static final String LOGIN_ADMIN = "admin";
     private static final String PASSWORD_ADMIN = "admin";
     private static final User ADMIN = new User(1L, "admin", "admin", "Роман", "Александров", Role.ADMIN, 0.0D, false, 0.0D, null, null, 0);
-  //  private static final User ADMIN_PASSWORD = new User(1L, "admin", "admin-admin", "Роман", "Александров", Role.ADMIN, 0.0D, false, 0.0D, null, null, 0);
     private static final User FIRST_USER = new User(2L, "user1", "user1", "Дмитрий", "Смирнов", Role.USER, 0.0D, false, 0.0D, null, null, 0);
     private static final User SECOND_USER = new User(3L, "user2", "user2", "Федор", "Козлов", Role.USER, 0.0D, false, 0.0D, null, null, 0);
     private static final User THIRD_USER = new User(4L, "user3", "user3", "Алексей", "Чернов", Role.USER, 0.0D, false, 0.0D, null, null, 0);
@@ -88,42 +86,4 @@ public class UserServiceImplTest {
 
         List<User> actual = userService.getAllUsers();
     }
-
-
- /*   @Test
-    public void testChangeUserPasswordShouldValid() throws ServiceException, DaoException {
-        Optional<User> expected = changePassword(ADMIN, "admin-admin");
-        when(helperFactoryMock.create()).thenReturn(helperMock);
-        when(helperMock.createUserDao()).thenReturn(userDaoMock);
-        //when(userDaoMock.changePasswordByUserId(1L, "admin-admin"));
-        when(userDaoMock.getById(1L)).thenReturn(expected);
-
-        userService.changePassword(ADMIN.getId(), "admin-admin");
-
-        Optional<User> actual = userService.login(LOGIN_ADMIN, "admin-admin");
-
-        Assert.assertEquals(actual, expected);
-    }
-
-    private Optional<User> changePassword(User user, String password) {
-        user.setPassword(password);
-        return Optional.of(user);
-
-    }
-
-
-    @Test
-    public void testChangeUserPasswordShouldValid() throws ServiceException, DaoException {
-        Optional<User> actual = of(ADMIN);
-        Optional<User> expected = changePassword(ADMIN, "admin-admin");
-        when(helperFactoryMock.create()).thenReturn(helperMock);
-        when(helperMock.createUserDao()).thenReturn(userDaoMock);
-        when(userDaoMock.changePasswordByUserId(1L, "admin-admin")).then(changePassword(actual.get(), "admin-admin"));
-        when(userDaoMock.getById(1L)).thenReturn(actual);
-
-        userService.changePassword(ADMIN.getId(), "admin-admin");
-
-        Assert.assertEquals(ADMIN.getPassword(), "admin-admin");
-    }*/
-
 }

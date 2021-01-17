@@ -19,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+//description class
+
+
 public class InfoPageCommand implements Command {
     private static final String INFO_LOCATION = "/WEB-INF/view/pages/info.jsp";
     private static final String ID = "user_id";
@@ -37,6 +40,7 @@ public class InfoPageCommand implements Command {
         this.tariffPlanService = tariffPlanService;
         this.promotionService = promotionService;
     }
+
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {

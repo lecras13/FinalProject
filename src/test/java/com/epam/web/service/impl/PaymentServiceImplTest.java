@@ -84,8 +84,4 @@ public class PaymentServiceImplTest {
 
         Assert.assertEquals(actual, PAYMENTS_FOR_PAGE);
     }
-
-
-
-
 }

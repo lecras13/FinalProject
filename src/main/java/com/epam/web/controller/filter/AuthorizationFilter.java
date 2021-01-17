@@ -1,6 +1,7 @@
 package com.epam.web.controller.filter;
 
 import com.epam.web.entity.Role;
+import com.epam.web.exception.ServiceException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The {@code AuthorizationFilter} a class that implements the {@code Filter} interface, defining access by role
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class AuthorizationFilter implements Filter {
     private static final String COMMAND = "command";
     private static final String ROLE = "userRole";
@@ -18,6 +26,11 @@ public class AuthorizationFilter implements Filter {
     private  List<String> userCommandList;
     private  List<String> guestCommandList;
 
+    /**
+     * Initialization of access commands
+     *
+     * @param filterConfig FilterConfig object the current filterConfig
+     */
     @Override
     public void init(FilterConfig filterConfig) {
         adminCommandList = new ArrayList<>();
@@ -53,6 +66,13 @@ public class AuthorizationFilter implements Filter {
         guestCommandList.add("promotions");
     }
 
+    /**
+     * Performs filter work directly
+     *
+     * @param servletRequest HttpServletRequest object the current servletRequest
+     * @param servletResponse HttpServletResponse object the current servletResponse
+     * @param filterChain FilterChain object the current filterChain
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;

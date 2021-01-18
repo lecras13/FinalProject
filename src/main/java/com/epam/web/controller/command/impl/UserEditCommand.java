@@ -12,6 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The {@code UserEditCommand} the class represents user edit command.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class UserEditCommand implements Command {
     private static final String USER_EDIT_LOCATION = "/WEB-INF/view/pages/user-edit.jsp";
     private static final String ID = "id";
@@ -35,38 +42,47 @@ public class UserEditCommand implements Command {
         this.tariffPlanService = tariffPlanService;
     }
 
+    /**
+     * Execute command to edit user-page using the parameters of HttpServletRequest object
+     * and returns CommandResult to edit user page.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        HttpSession session = request.getSession();
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
+        HttpSession session = servletRequest.getSession();
         Long id = session.getAttribute(SESSION_ROLE).equals(Role.USER) ?
                 (Long) session.getAttribute(USER_ID) :
-                Long.parseLong(request.getParameter(ID));
+                Long.parseLong(servletRequest.getParameter(ID));
 
-        String login = request.getParameter(LOGIN);
-        String firstName = request.getParameter(FIRST_NAME);
-        String lastName = request.getParameter(LAST_NAME);
-        Role role = Role.valueOf(request.getParameter(ROLE));
-        Double totalAmount = Double.parseDouble(request.getParameter(TOTAL_AMOUNT));
-        String tariffId = request.getParameter(TARIFF_ID);
-        String promotionId = request.getParameter(PROMOTION_ID);
-        String statusBlock = request.getParameter(STATUS_BLOCK);
-        Double traffic = Double.parseDouble(request.getParameter(TRAFFIC));
-        String discount = request.getParameter(DISCOUNT);
+        String login = servletRequest.getParameter(LOGIN);
+        String firstName = servletRequest.getParameter(FIRST_NAME);
+        String lastName = servletRequest.getParameter(LAST_NAME);
+        Role role = Role.valueOf(servletRequest.getParameter(ROLE));
+        Double totalAmount = Double.parseDouble(servletRequest.getParameter(TOTAL_AMOUNT));
+        String tariffId = servletRequest.getParameter(TARIFF_ID);
+        String promotionId = servletRequest.getParameter(PROMOTION_ID);
+        String statusBlock = servletRequest.getParameter(STATUS_BLOCK);
+        Double traffic = Double.parseDouble(servletRequest.getParameter(TRAFFIC));
+        String discount = servletRequest.getParameter(DISCOUNT);
 
-        request.setAttribute(ID, id);
-        request.setAttribute(LOGIN, login);
-        request.setAttribute(FIRST_NAME, firstName);
-        request.setAttribute(LAST_NAME, lastName);
-        request.setAttribute(ROLE, role);
-        request.setAttribute(TOTAL_AMOUNT, totalAmount);
-        request.setAttribute(STATUS_BLOCK, statusBlock);
-        request.setAttribute(TRAFFIC, traffic);
-        request.setAttribute(DISCOUNT, discount);
-        request.setAttribute(TARIFF_ID, tariffId);
-        request.setAttribute(PROMOTION_ID, promotionId);
+        servletRequest.setAttribute(ID, id);
+        servletRequest.setAttribute(LOGIN, login);
+        servletRequest.setAttribute(FIRST_NAME, firstName);
+        servletRequest.setAttribute(LAST_NAME, lastName);
+        servletRequest.setAttribute(ROLE, role);
+        servletRequest.setAttribute(TOTAL_AMOUNT, totalAmount);
+        servletRequest.setAttribute(STATUS_BLOCK, statusBlock);
+        servletRequest.setAttribute(TRAFFIC, traffic);
+        servletRequest.setAttribute(DISCOUNT, discount);
+        servletRequest.setAttribute(TARIFF_ID, tariffId);
+        servletRequest.setAttribute(PROMOTION_ID, promotionId);
 
         List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlans();
-        request.setAttribute(TARIFF_PLANS, tariffPlans);
+        servletRequest.setAttribute(TARIFF_PLANS, tariffPlans);
 
         return CommandResult.forward(USER_EDIT_LOCATION);
     }

@@ -10,6 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * The {@code PromotionEditCommand} the class represents promotion edit command.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class PromotionEditCommand implements Command {
     private static final String PROMOTIONS_EDIT_LOCATION = "/WEB-INF/view/pages/promotions-edit.jsp";
     private static final String ID = "id";
@@ -27,28 +34,37 @@ public class PromotionEditCommand implements Command {
         this.tariffPlanService = tariffPlanService;
     }
 
+    /**
+     * Execute command to edit promotion using the parameters of HttpServletRequest object
+     * and returns CommandResult to promotion edit page.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        if (request.getParameter(ID) != null) {
-            Long id = Long.parseLong(request.getParameter(ID));
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
+        if (servletRequest.getParameter(ID) != null) {
+            Long id = Long.parseLong(servletRequest.getParameter(ID));
 
-            String promotionName = request.getParameter(PROMOTION_NAME);
-            String startDate = request.getParameter(START_DATE);
-            String endDate = request.getParameter(END_DATE);
-            String description = request.getParameter(DESCRIPTION);
-            String tariffId = request.getParameter(TARIFF_ID);
-            String newPrice = request.getParameter(NEW_PRICE);
+            String promotionName = servletRequest.getParameter(PROMOTION_NAME);
+            String startDate = servletRequest.getParameter(START_DATE);
+            String endDate = servletRequest.getParameter(END_DATE);
+            String description = servletRequest.getParameter(DESCRIPTION);
+            String tariffId = servletRequest.getParameter(TARIFF_ID);
+            String newPrice = servletRequest.getParameter(NEW_PRICE);
 
-            request.setAttribute(ID, id);
-            request.setAttribute(PROMOTION_NAME, promotionName);
-            request.setAttribute(START_DATE, startDate);
-            request.setAttribute(END_DATE, endDate);
-            request.setAttribute(DESCRIPTION, description);
-            request.setAttribute(TARIFF_ID, tariffId);
-            request.setAttribute(NEW_PRICE, newPrice);
+            servletRequest.setAttribute(ID, id);
+            servletRequest.setAttribute(PROMOTION_NAME, promotionName);
+            servletRequest.setAttribute(START_DATE, startDate);
+            servletRequest.setAttribute(END_DATE, endDate);
+            servletRequest.setAttribute(DESCRIPTION, description);
+            servletRequest.setAttribute(TARIFF_ID, tariffId);
+            servletRequest.setAttribute(NEW_PRICE, newPrice);
         }
         List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlans();
-        request.setAttribute(TARIFF_PLANS, tariffPlans);
+        servletRequest.setAttribute(TARIFF_PLANS, tariffPlans);
 
         return CommandResult.forward(PROMOTIONS_EDIT_LOCATION);
     }

@@ -10,17 +10,18 @@ import com.epam.web.exception.ServiceException;
 import com.epam.web.service.PromotionService;
 import com.epam.web.service.TariffPlanService;
 import com.epam.web.service.UserService;
-import com.epam.web.service.impl.PromotionServiceImpl;
-import com.epam.web.service.impl.TariffPlanServiceImpl;
-import com.epam.web.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-//description class
-
+/**
+ * The {@code InfoPageCommand} the class represents a transition to a page with information about the user.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class InfoPageCommand implements Command {
     private static final String INFO_LOCATION = "/WEB-INF/view/pages/info.jsp";
@@ -41,26 +42,34 @@ public class InfoPageCommand implements Command {
         this.promotionService = promotionService;
     }
 
-
+    /**
+     * Execute command to get info using the parameters of HttpServletRequest object
+     * and returns CommandResult to a page with information about the user.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        HttpSession session = request.getSession();
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
+        HttpSession session = servletRequest.getSession();
         Long id = session.getAttribute(SESSION_ROLE).equals(Role.USER) ?
                 (Long) session.getAttribute(ID) :
-                Long.parseLong(request.getParameter(ID));
+                Long.parseLong(servletRequest.getParameter(ID));
 
         Optional<User> userOptional = userService.getUserById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             Long tariffId = user.getTariffId();
             Long promotionId = user.getPromotionId();
-            request.setAttribute(USER, user);
+            servletRequest.setAttribute(USER, user);
 
             Optional<TariffPlan> tariffPlanOptional = tariffPlanService.getTariffPlanById(tariffId);
             if (tariffPlanOptional.isPresent()) {
                 TariffPlan tariffPlan = tariffPlanOptional.get();
                 String tariffPlanName = tariffPlan.getTariffName();
-                request.setAttribute(TARIFF_NAME, tariffPlanName);
+                servletRequest.setAttribute(TARIFF_NAME, tariffPlanName);
             }
 
             if (promotionId > 0) {
@@ -68,10 +77,10 @@ public class InfoPageCommand implements Command {
                 if (promotionOptional.isPresent()) {
                     Promotion promotion = promotionOptional.get();
                     String promotionName = promotion.getPromotionName();
-                    request.setAttribute(PROMOTION_NAME, promotionName);
+                    servletRequest.setAttribute(PROMOTION_NAME, promotionName);
                 }
             } else {
-                request.setAttribute(PROMOTION_NAME, PROMOTION_NONE);
+                servletRequest.setAttribute(PROMOTION_NAME, PROMOTION_NONE);
             }
         }
         return CommandResult.forward(INFO_LOCATION);

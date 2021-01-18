@@ -12,6 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+/**
+ * The {@code LoginCommand} the class checks the user for certain rights and transition to a appropriate page.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class LoginCommand implements Command {
     private static final String ID = "user_id";
     private static final String LOGIN = "login";
@@ -30,13 +37,22 @@ public class LoginCommand implements Command {
         this.service = service;
     }
 
+    /**
+     * Execute command to login using the parameters of HttpServletRequest object
+     * and returns CommandResult to a appropriate page.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
-    public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
-        String login = req.getParameter(LOGIN);
-        String password = req.getParameter(PASSWORD);
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
+        String login = servletRequest.getParameter(LOGIN);
+        String password = servletRequest.getParameter(PASSWORD);
 
         Optional<User> guest = service.login(login, password);
-        HttpSession session = req.getSession();
+        HttpSession session = servletRequest.getSession();
 
         if (guest.isPresent()) {
             User user = guest.get();
@@ -48,11 +64,11 @@ public class LoginCommand implements Command {
                 session.setAttribute(ROLE, role);
                 return redirectByRole(role);
             } else {
-                req.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE_USER_BLOCKED);
+                servletRequest.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE_USER_BLOCKED);
                 return CommandResult.forward(INDEX_PAGE);
             }
         } else {
-            req.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE_USER_NOT_FOUND);
+            servletRequest.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE_USER_NOT_FOUND);
             return CommandResult.forward(INDEX_PAGE);
         }
     }

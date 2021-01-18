@@ -33,7 +33,6 @@ public class PaymentServiceImplTest {
     private DaoHelperFactory helperFactoryMock;
     private DaoHelper helperMock;
     private PaymentDao paymentDaoMock;
-    private PaymentValidator paymentValidatorMock;
     private PaymentService paymentService;
 
     @Before
@@ -41,7 +40,7 @@ public class PaymentServiceImplTest {
         helperFactoryMock = Mockito.mock(DaoHelperFactory.class);
         helperMock = Mockito.mock(DaoHelper.class);
         paymentDaoMock = Mockito.mock(PaymentDao.class);
-        paymentValidatorMock = Mockito.mock(PaymentValidator.class);
+        PaymentValidator paymentValidatorMock = Mockito.mock(PaymentValidator.class);
         paymentService = new PaymentServiceImpl(helperFactoryMock, paymentValidatorMock);
     }
 

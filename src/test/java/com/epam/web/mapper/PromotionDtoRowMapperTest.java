@@ -6,6 +6,7 @@ import com.epam.web.entity.dto.PromotionDto;
 import com.epam.web.mapper.impl.PromotionDtoRowMapper;
 import com.epam.web.mapper.impl.TariffRowMapper;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import java.sql.Date;
@@ -27,14 +28,20 @@ public class PromotionDtoRowMapperTest {
     private static final String TARIFF_ID = "tariff_id";
     private static final String NEW_PRICE = "new_price";
 
+    private TariffRowMapper tariffRowMapper;
+    private PromotionDtoRowMapper promotionDtoRowMapper;
+    private ResultSet resultSet;
+
+    @Before
+    public void setUp(){
+        tariffRowMapper = Mockito.mock(TariffRowMapper.class);
+        promotionDtoRowMapper = new PromotionDtoRowMapper(tariffRowMapper);
+        resultSet = Mockito.mock(ResultSet.class);
+    }
 
     @Test
     public void testMapShouldReturnAccountWithNoPassword() throws SQLException{
         //given
-        TariffRowMapper tariffRowMapper =Mockito.mock(TariffRowMapper.class);
-        PromotionDtoRowMapper promotionDtoRowMapper =new PromotionDtoRowMapper(tariffRowMapper);
-        PromotionDto expected = PROMOTION_DTO;
-        ResultSet resultSet = Mockito.mock(ResultSet.class);
         //when
         when(tariffRowMapper.map(resultSet)).thenReturn(TARIFF_PLAN);
         when(resultSet.getLong(ID)).thenReturn(5L);
@@ -46,6 +53,15 @@ public class PromotionDtoRowMapperTest {
         when(resultSet.getInt(NEW_PRICE)).thenReturn(5);
         //then
         PromotionDto actual = promotionDtoRowMapper.map(resultSet);
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(PROMOTION_DTO, actual);
+    }
+
+    @Test(expected = SQLException.class)
+    public void testMapShouldReturnSQLException() throws SQLException{
+        //given
+        //when
+        when(resultSet.getLong(ID)).thenThrow(SQLException.class);
+        //then
+        PromotionDto actual = promotionDtoRowMapper.map(resultSet);
     }
 }

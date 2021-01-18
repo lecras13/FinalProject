@@ -6,11 +6,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * The {@code ConnectionPool} represents pool of connections with a given number.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
@@ -19,12 +27,16 @@ public class ConnectionPool {
     private static final ReentrantLock LOCKER_FOR_CLASS = new ReentrantLock();
 
     private static ConnectionPool instance = null;
-    private final ConnectionFactory connectionFactory = new ConnectionFactory();
     private static final AtomicBoolean isCreated = new AtomicBoolean(false);
     private final Semaphore semaphore = new Semaphore(POOL_SIZE, true);
     private final Queue<ProxyConnection> availableConnection;
     private final Queue<ProxyConnection> connectionsInUse;
 
+    /**
+     * @return instance of the pool.
+     *
+     * @throws ConnectionPoolException the sql exception
+     */
     public static ConnectionPool getInstance() throws ConnectionPoolException {
         if (!isCreated.get()) {
             LOCKER_FOR_CLASS.lock();
@@ -44,16 +56,27 @@ public class ConnectionPool {
         return instance;
     }
 
+    /**
+     * Constructor creating a certain number of connections
+     *
+     * @return instance of the pool.
+     */
     private ConnectionPool() throws DaoException {
         availableConnection = new ArrayDeque<>(POOL_SIZE);
         connectionsInUse = new ArrayDeque<>(POOL_SIZE);
         for (int i = 0; i < POOL_SIZE; i++) {
+            ConnectionFactory connectionFactory = new ConnectionFactory();
             Connection connection = connectionFactory.createConnection();
             ProxyConnection proxyConnection = new ProxyConnection(connection);
             availableConnection.add(proxyConnection);
         }
     }
 
+    /**
+     * Release connection.
+     *
+     * @param proxyConnection the connection
+     */
     public void releaseConnection(ProxyConnection proxyConnection) {
         LOCKER.lock();
         try {
@@ -67,6 +90,9 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * @return connection for  the connection pool.
+     */
     public ProxyConnection getConnection() {
         LOCKER.lock();
         try {
@@ -80,12 +106,22 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Destroying the connection pool
+     *
+     * @throws ConnectionPoolException the sql exception
+     */
     public void destroyPool() {
-        for (int i = 0; i < POOL_SIZE; i++) {
-            availableConnection.poll().close();
+        availableConnection.addAll(connectionsInUse);
+        connectionsInUse.clear();
+        try {
+            for (ProxyConnection connection : availableConnection) {
+                connection.shutDown();
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Connection pool has been destroyed!");
+            throw new ConnectionPoolException();
         }
-        LOGGER.info("Connection pool has been destroyed!");
     }
-
 }
 

@@ -5,6 +5,7 @@ import com.epam.web.controller.command.CommandFactory;
 import com.epam.web.controller.command.CommandResult;
 import com.epam.web.controller.connection.ConnectionPool;
 import com.epam.web.exception.ConnectionPoolException;
+import com.epam.web.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,44 +16,84 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The {@code Servlet} represents main controller.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class Servlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(Servlet.class);
     private static final String COMMAND = "command";
     private static final int ERROR_404 = 404;
 
+    /**
+     * Execute method doPost
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @throws IOException thrown for checked exceptions of lower application levels
+     */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        process(req, resp);
+    protected void doPost(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws IOException {
+        process(servletRequest, servletResponse);
     }
 
+    /**
+     * Execute method doGet
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @throws IOException thrown for checked exceptions of lower application levels
+     */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        process(req, resp);
+    protected void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws IOException {
+        process(servletRequest, servletResponse);
     }
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    /**
+     * Method presents creating {@link Command} and executing it
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @throws IOException thrown for checked exceptions of lower application levels
+     */
+    private void process(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws IOException {
         try {
-            String commandParam = req.getParameter(COMMAND);
+            String commandParam = servletRequest.getParameter(COMMAND);
             Command command = CommandFactory.create(commandParam);
-            CommandResult commandResult = command.execute(req, resp);
-            dispatch(commandResult, req, resp);
+            CommandResult commandResult = command.execute(servletRequest, servletResponse);
+            dispatch(commandResult, servletRequest, servletResponse);
         } catch (Exception e) {
             LOGGER.error("Error 404");
-            resp.sendError(ERROR_404);
+            servletResponse.sendError(ERROR_404);
         }
     }
 
-    private void dispatch(final CommandResult commandResult, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    /**
+     * Method presents transition to next page by {@link CommandResult} type redirect
+     *
+     * @param commandResult {@link CommandResult} object from the received command
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @throws IOException thrown for checked exceptions of lower application levels
+     */
+    private void dispatch(final CommandResult commandResult, HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
         boolean redirect = commandResult.isRedirect();
         String page = commandResult.getCommand();
         if (redirect) {
-            resp.sendRedirect(page);
+            servletResponse.sendRedirect(page);
         } else {
-            RequestDispatcher dispatcher = req.getRequestDispatcher(page);
-            dispatcher.forward(req, resp);
+            RequestDispatcher dispatcher = servletRequest.getRequestDispatcher(page);
+            dispatcher.forward(servletRequest, servletResponse);
         }
     }
 
+    /**
+     * Destroying connection pool and ending servlet work
+     *
+     */
     public void destroy() {
         super.destroy();
         try {

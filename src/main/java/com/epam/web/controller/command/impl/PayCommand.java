@@ -5,13 +5,18 @@ import com.epam.web.controller.command.CommandResult;
 import com.epam.web.entity.Payment;
 import com.epam.web.exception.ServiceException;
 import com.epam.web.service.PaymentService;
-import com.epam.web.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.List;
+
+/**
+ * The {@code PayCommand} the class increase user balance and transition to a appropriate to info page.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class PayCommand implements Command {
     private static final String INFO_LOCATION = "/controller?command=info";
@@ -24,23 +29,32 @@ public class PayCommand implements Command {
 
     private final PaymentService paymentService;
 
-    public PayCommand(PaymentService paymentService){
+    public PayCommand(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
 
+    /**
+     * Execute command to pay using the parameters of HttpServletRequest object
+     * and returns CommandResult to a appropriate to info page.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException{
-        HttpSession session = request.getSession();
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
+        HttpSession session = servletRequest.getSession();
         Long userId = (Long) session.getAttribute(ID);
-        Double amount = Double.parseDouble(request.getParameter(AMOUNT));
+        Double amount = Double.parseDouble(servletRequest.getParameter(AMOUNT));
         try {
             paymentService.pay(amount, userId);
         } catch (ServiceException e) {
-            request.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE);
+            servletRequest.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE);
             return CommandResult.forward(PAYMENT_FORM_LOCATION);
         }
         List<Payment> payments = paymentService.getPayments(userId);
-        request.setAttribute(PAYMENTS, payments);
+        servletRequest.setAttribute(PAYMENTS, payments);
         return CommandResult.redirect(INFO_LOCATION);
     }
 }

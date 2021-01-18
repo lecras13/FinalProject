@@ -2,6 +2,13 @@ package com.epam.web.controller.command;
 
 import java.util.Objects;
 
+/**
+ * The {@code CommandResult} represents to servlet further navigation
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class CommandResult {
     private final String command;
     private final boolean isRedirect;
@@ -11,10 +18,22 @@ public class CommandResult {
         this.isRedirect = isRedirect;
     }
 
+    /**
+     *  Returns CommandResult object with further instructions forward to the page
+     *
+     * @param page path to next page
+     * @return CommandResult object navigate to the page
+     */
     public static CommandResult forward(String page) {
         return new CommandResult(page, false);
     }
 
+    /**
+     *  Returns CommandResult object with further instructions forward to the page
+     *
+     * @param page path to next page
+     * @return CommandResult object navigate to the page
+     */
     public static CommandResult redirect(String page) {
         return new CommandResult(page, true);
     }

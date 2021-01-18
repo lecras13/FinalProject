@@ -7,6 +7,13 @@ import com.epam.web.exception.ServiceException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * The {@code TariffPlanEditCommand} the class represents tariff plan edit command.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class TariffPlanEditCommand implements Command {
     private static final String TARIFF_EDIT_LOCATION = "/WEB-INF/view/pages/tariffs-edit.jsp";
     private static final String ID = "tariff_id";
@@ -17,18 +24,26 @@ public class TariffPlanEditCommand implements Command {
     public TariffPlanEditCommand() {
     }
 
+    /**
+     * Execute command to edit tariff plan using the parameters of HttpServletRequest object
+     * and returns CommandResult to tariff plan edit page.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     */
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response)  {
-        if (request.getParameter(ID) != null) {
-            Long id = Long.parseLong(request.getParameter(ID));
-            String tariffName = request.getParameter(TARIFF_NAME);
-            Integer price = Integer.parseInt(request.getParameter(PRICE));
-            String description = request.getParameter(DESCRIPTION);
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+        if (servletRequest.getParameter(ID) != null) {
+            Long id = Long.parseLong(servletRequest.getParameter(ID));
+            String tariffName = servletRequest.getParameter(TARIFF_NAME);
+            Integer price = Integer.parseInt(servletRequest.getParameter(PRICE));
+            String description = servletRequest.getParameter(DESCRIPTION);
 
-            request.setAttribute(ID, id);
-            request.setAttribute(TARIFF_NAME, tariffName);
-            request.setAttribute(PRICE, price);
-            request.setAttribute(DESCRIPTION, description);
+            servletRequest.setAttribute(ID, id);
+            servletRequest.setAttribute(TARIFF_NAME, tariffName);
+            servletRequest.setAttribute(PRICE, price);
+            servletRequest.setAttribute(DESCRIPTION, description);
         }
         return CommandResult.forward(TARIFF_EDIT_LOCATION);
     }

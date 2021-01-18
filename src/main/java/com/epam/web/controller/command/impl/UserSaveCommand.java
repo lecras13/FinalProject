@@ -13,6 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+/**
+ * The {@code TariffPlanSaveCommand} the class represents saving command and transition to a page with tariff plans.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class UserSaveCommand implements Command {
     private static final String LIST_USERS_LOCATION = "/controller?command=users";
     private static final String INFO_LOCATION = "/controller?command=info";
@@ -36,19 +43,28 @@ public class UserSaveCommand implements Command {
         this.userService = userService;
     }
 
+    /**
+     * Execute command to save user using the parameters of HttpServletRequest object
+     * and returns CommandResult to info user page.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse resp) throws ServiceException {
-        HttpSession session = request.getSession();
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
+        HttpSession session = servletRequest.getSession();
         Long id = session.getAttribute(SESSION_ROLE).equals(Role.USER) ?
                 (Long) session.getAttribute(USER_ID) :
-                Long.parseLong(request.getParameter(ID));
+                Long.parseLong(servletRequest.getParameter(ID));
 
-        String login = request.getParameter(LOGIN);
-        String firstName = request.getParameter(FIRST_NAME);
-        String lastName = request.getParameter(LAST_NAME);
-        Boolean statusBlock = Boolean.valueOf(request.getParameter(STATUS_BLOCK));
-        Integer discount = Integer.parseInt(request.getParameter(DISCOUNT));
-        Long tariffId = Long.parseLong(request.getParameter(TARIFF_SELECT));
+        String login = servletRequest.getParameter(LOGIN);
+        String firstName = servletRequest.getParameter(FIRST_NAME);
+        String lastName = servletRequest.getParameter(LAST_NAME);
+        Boolean statusBlock = Boolean.valueOf(servletRequest.getParameter(STATUS_BLOCK));
+        Integer discount = Integer.parseInt(servletRequest.getParameter(DISCOUNT));
+        Long tariffId = Long.parseLong(servletRequest.getParameter(TARIFF_SELECT));
 
         Optional<User> userOptional = userService.getUserById(id);
         User user = null;
@@ -62,7 +78,7 @@ public class UserSaveCommand implements Command {
             user.setTariffId(tariffId);
         }
         if (!userValidator.isValid(user)) {
-            request.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE);
+            servletRequest.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE);
             return CommandResult.forward(INFO_LOCATION);
         } else {
             Object[] paramAdmin = new Object[]{login, firstName, lastName, statusBlock, discount, tariffId, id};

@@ -2,11 +2,22 @@ package com.epam.web.controller.command;
 
 import com.epam.web.controller.command.impl.*;
 import com.epam.web.dao.helper.DaoHelperFactory;
+import com.epam.web.exception.ServiceException;
 import com.epam.web.service.impl.*;
 import com.epam.web.validator.PaymentValidator;
 import com.epam.web.validator.PromotionValidator;
 import com.epam.web.validator.TariffPlanValidator;
 import com.epam.web.validator.UserValidator;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * The {@code CommandFactory} represents command control.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class CommandFactory {
     private static final String MAIN_LOCATION = "WEB-INF/view/pages/main.jsp";
@@ -37,7 +48,11 @@ public class CommandFactory {
     private static final String PAYMENT_PAY = "payment-pay";
     private static final String PAYMENT = "payment";
 
-
+    /**
+     * Creating command based on request.
+     *
+     * @param command the current command
+     */
     public static Command create(String command) {
         switch (command) {
             case PAYMENTS_HISTORY:

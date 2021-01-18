@@ -8,6 +8,13 @@ import com.epam.web.service.TariffPlanService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * The {@code TariffPlanSaveCommand} the class represents saving command and transition to a page with tariff plans.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class TariffPlanSaveCommand implements Command {
     private static final String TARIFF_PLANS_PAGE = "/controller?command=tariffs";
     private static final String TARIFF_EDIT_LOCATION = "/WEB-INF/view/pages/tariffs-edit.jsp";
@@ -21,22 +28,30 @@ public class TariffPlanSaveCommand implements Command {
 
     private final TariffPlanService service;
 
-    public TariffPlanSaveCommand(TariffPlanService service){
+    public TariffPlanSaveCommand(TariffPlanService service) {
         this.service = service;
     }
 
+    /**
+     * Execute command to save tariff plan using the parameters of HttpServletRequest object
+     * and returns CommandResult to tariff plans page.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     */
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        Long id = request.getParameter(ID).equals(EMPTY_STRING) ? null : Long.parseLong(request.getParameter(ID));
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+        Long id = servletRequest.getParameter(ID).equals(EMPTY_STRING) ? null : Long.parseLong(servletRequest.getParameter(ID));
 
-        String tariffName = request.getParameter(TARIFF_NAME);
-        Integer price = Integer.parseInt(request.getParameter(PRICE));
-        String description = request.getParameter(DESCRIPTION);
+        String tariffName = servletRequest.getParameter(TARIFF_NAME);
+        Integer price = Integer.parseInt(servletRequest.getParameter(PRICE));
+        String description = servletRequest.getParameter(DESCRIPTION);
 
         try {
             service.saveTariffPlan(id, tariffName, price, description);
         } catch (ServiceException e) {
-            request.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE);
+            servletRequest.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE);
             return CommandResult.forward(TARIFF_EDIT_LOCATION);
         }
         return CommandResult.redirect(TARIFF_PLANS_PAGE);

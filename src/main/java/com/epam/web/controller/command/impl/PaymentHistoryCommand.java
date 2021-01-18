@@ -13,6 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The {@code PaymentHistoryCommand} the class represents transition history payments current user.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class PaymentHistoryCommand implements Command {
     private static final String PAYMENTS_PAGE = "/WEB-INF/view/pages/payments.jsp";
     private static final String PAYMENTS = "payments";
@@ -30,16 +37,25 @@ public class PaymentHistoryCommand implements Command {
         this.pageController = pageController;
     }
 
+    /**
+     * Execute command to payment history using the parameters of HttpServletRequest object
+     * and returns CommandResult to history payments page current user.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        int currentPage = pageController.getCurrentPage(request);
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
+        int currentPage = pageController.getCurrentPage(servletRequest);
 
         Long id;
-        HttpSession session = request.getSession();
+        HttpSession session = servletRequest.getSession();
         if (session.getAttribute(ROLE).equals(Role.USER)) {
             id = (Long) session.getAttribute(ID);
         } else {
-            id = Long.parseLong(request.getParameter(ID));
+            id = Long.parseLong(servletRequest.getParameter(ID));
         }
 
         List<Payment> paymentList = paymentService.getPaymentsForPage(id, (currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
@@ -47,10 +63,10 @@ public class PaymentHistoryCommand implements Command {
         int numberOfRecords = paymentService.getPayments(id).size();
         int numberPages = pageController.getNumberPages(numberOfRecords, RECORDS_ON_PAGE);
 
-        request.setAttribute(ID, id);
-        request.setAttribute(NO_OF_PAGES, numberPages);
-        request.setAttribute(CURRENT_PAGE, currentPage);
-        request.setAttribute(PAYMENTS, paymentList);
+        servletRequest.setAttribute(ID, id);
+        servletRequest.setAttribute(NO_OF_PAGES, numberPages);
+        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
+        servletRequest.setAttribute(PAYMENTS, paymentList);
         return CommandResult.forward(PAYMENTS_PAGE);
     }
 }

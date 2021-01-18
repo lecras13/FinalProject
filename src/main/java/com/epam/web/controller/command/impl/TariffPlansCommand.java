@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * The {@code TariffPlansCommand} the class represents transition to a page tariff plans.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class TariffPlansCommand implements Command {
     private static final String TARIFF_PLANS_PAGE = "/WEB-INF/view/pages/tariff-plans.jsp";
     private static final String TARIFF_PLANS = "tariffs";
@@ -26,17 +33,26 @@ public class TariffPlansCommand implements Command {
         this.pageController = pageController;
     }
 
+    /**
+     * Execute command to show tariff plan using the parameters of HttpServletRequest object
+     * and returns CommandResult to tariff plans page.
+     *
+     * @param servletRequest  {@link HttpServletRequest} object the current servletRequest
+     * @param servletResponse {@link HttpServletResponse} object the current servletResponse
+     * @return {@link CommandResult} object navigate to the page
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        int currentPage = pageController.getCurrentPage(request);
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
+        int currentPage = pageController.getCurrentPage(servletRequest);
         List<TariffPlan> tariffPlansForPage = tariffPlanService.getTariffPlansForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
 
         int numberOfRecords = tariffPlanService.getTariffPlans().size();
         int numberPages = pageController.getNumberPages(numberOfRecords, RECORDS_ON_PAGE);
 
-        request.setAttribute(NO_OF_PAGES, numberPages);
-        request.setAttribute(CURRENT_PAGE, currentPage);
-        request.setAttribute(TARIFF_PLANS, tariffPlansForPage);
+        servletRequest.setAttribute(NO_OF_PAGES, numberPages);
+        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
+        servletRequest.setAttribute(TARIFF_PLANS, tariffPlansForPage);
         return CommandResult.forward(TARIFF_PLANS_PAGE);
     }
 }

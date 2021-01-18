@@ -28,5 +28,4 @@ public class GoToPage implements Command {
     public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
         return CommandResult.forward(page);
     }
-
 }

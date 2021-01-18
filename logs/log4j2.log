@@ -13557,3 +13557,70 @@
 18.01.2021 11:14:30 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - PromotionDto_HELPER in load
 18.01.2021 11:14:30 [http-bio-8087-exec-10] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
 18.01.2021 11:14:30 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:27:19 [http-bio-8087-exec-3] INFO  epam.web.controller.connection.ConnectionPool - Pool Created successfully.
+18.01.2021 22:27:19 [http-bio-8087-exec-3] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:19 [http-bio-8087-exec-3] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:27:19 [http-bio-8087-exec-4] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:19 [http-bio-8087-exec-4] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:27:19 [http-bio-8087-exec-4] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:19 [http-bio-8087-exec-4] INFO  epam.web.dao.helper.DaoHelper - Tariff_HELPER in load
+18.01.2021 22:27:21 [http-bio-8087-exec-5] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:21 [http-bio-8087-exec-5] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:27:21 [http-bio-8087-exec-5] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:21 [http-bio-8087-exec-5] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:27:29 [http-bio-8087-exec-8] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:29 [http-bio-8087-exec-8] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:27:29 [http-bio-8087-exec-8] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:27:29 [http-bio-8087-exec-8] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:29 [http-bio-8087-exec-8] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:27:29 [http-bio-8087-exec-9] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:29 [http-bio-8087-exec-9] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:27:29 [http-bio-8087-exec-9] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:29 [http-bio-8087-exec-9] INFO  epam.web.dao.helper.DaoHelper - Tariff_HELPER in load
+18.01.2021 22:27:30 [http-bio-8087-exec-10] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:30 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:27:30 [http-bio-8087-exec-10] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:30 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:27:35 [http-bio-8087-exec-10] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:35 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:27:35 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:27:35 [http-bio-8087-exec-10] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:35 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:27:35 [http-bio-8087-exec-10] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:35 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:27:35 [http-bio-8087-exec-10] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:35 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - Tariff_HELPER in load
+18.01.2021 22:27:39 [http-bio-8087-exec-10] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:39 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:27:39 [http-bio-8087-exec-10] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:27:39 [http-bio-8087-exec-10] INFO  epam.web.dao.helper.DaoHelper - Tariff_HELPER in load
+18.01.2021 22:32:22 [http-bio-8087-exec-3] INFO  epam.web.controller.connection.ConnectionPool - Pool Created successfully.
+18.01.2021 22:32:22 [http-bio-8087-exec-3] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:32:22 [http-bio-8087-exec-3] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:32:22 [http-bio-8087-exec-4] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:32:22 [http-bio-8087-exec-4] INFO  epam.web.dao.helper.DaoHelper - PromotionDto_HELPER in load
+18.01.2021 22:32:22 [http-bio-8087-exec-4] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:32:22 [http-bio-8087-exec-4] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:32:24 [http-bio-8087-exec-5] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:32:24 [http-bio-8087-exec-5] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:32:24 [http-bio-8087-exec-5] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:32:24 [http-bio-8087-exec-5] INFO  epam.web.dao.helper.DaoHelper - Tariff_HELPER in load
+18.01.2021 22:32:25 [http-bio-8087-exec-6] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:32:25 [http-bio-8087-exec-6] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:32:25 [http-bio-8087-exec-6] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:32:25 [http-bio-8087-exec-6] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:34:03 [http-bio-8087-exec-3] INFO  epam.web.controller.connection.ConnectionPool - Pool Created successfully.
+18.01.2021 22:34:03 [http-bio-8087-exec-3] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:34:03 [http-bio-8087-exec-3] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:34:03 [http-bio-8087-exec-4] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:34:03 [http-bio-8087-exec-4] INFO  epam.web.dao.helper.DaoHelper - PromotionDto_HELPER in load
+18.01.2021 22:34:03 [http-bio-8087-exec-4] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:34:03 [http-bio-8087-exec-4] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:34:04 [http-bio-8087-exec-5] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:34:04 [http-bio-8087-exec-5] INFO  epam.web.dao.helper.DaoHelper - USER_HELPER in load
+18.01.2021 22:34:04 [http-bio-8087-exec-5] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:34:04 [http-bio-8087-exec-5] INFO  epam.web.dao.helper.DaoHelper - Tariff_HELPER in load
+18.01.2021 22:34:06 [http-bio-8087-exec-6] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:34:06 [http-bio-8087-exec-6] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load
+18.01.2021 22:34:06 [http-bio-8087-exec-6] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
+18.01.2021 22:34:06 [http-bio-8087-exec-6] INFO  epam.web.dao.helper.DaoHelper - Promotion_HELPER in load

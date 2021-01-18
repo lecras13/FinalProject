@@ -5,12 +5,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+/**
+ * The {@code PaymentHistoryTag} represents class a custom tag that displays the payments history.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class PaymentHistoryTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger(PaymentHistoryTag.class);
@@ -21,6 +26,12 @@ public class PaymentHistoryTag extends TagSupport {
     private static final String TAG_COLUMN_OPEN = "<td>";
     private static final String TAG_COLUMN_CLOSE = "</td>";
     private final DateFormatLocale dateFormat = new DateFormatLocale();
+
+    /**
+     * Displays payments history
+     *
+     * @return tells the container that it should ignore everything between the start and end tag.
+     */
     @Override
     public int doStartTag() {
         ServletRequest servletRequest = pageContext.getRequest();
@@ -39,6 +50,16 @@ public class PaymentHistoryTag extends TagSupport {
             }
         }
         return SKIP_BODY;
+    }
+
+    /**
+     * Ending work tag
+     *
+     * @return tells container that needs to continue processing the JSP page
+     */
+    @Override
+    public int doEndTag() {
+        return EVAL_PAGE;
     }
 }
 

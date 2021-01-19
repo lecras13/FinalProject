@@ -114,12 +114,12 @@ public class DaoHelper implements AutoCloseable {
      *
      * @throws ServiceException in case of errors and  for checked exceptions of lower application levels
      */
-    public void rollback() throws DaoException {
+    public void rollback() throws ServiceException {
         try {
             connection.rollback();
         } catch (SQLException e) {
             LOGGER.error("SQLException when starting rollback!");
-            throw new DaoException(e);
+            throw new ServiceException(e);
         }
     }
 

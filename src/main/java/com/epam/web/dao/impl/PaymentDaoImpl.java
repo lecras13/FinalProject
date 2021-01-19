@@ -10,6 +10,13 @@ import com.epam.web.mapper.impl.PaymentRowMapper;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * The {@code PaymentDaoImpl} presents payment dao implementation
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class PaymentDaoImpl extends AbstractDaoPersistent<Payment> implements PaymentDao {
     private static final String TABLE_NAME = "payments";
     private static final String GET_PAYMENTS_BY_USER_ID = "select * from payments where user_id=?";

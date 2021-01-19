@@ -40,17 +40,34 @@ public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDa
         this.updateQuery = updateQuery;
     }
 
+    /**
+     * Getting {@link List} of persistent objects
+     *
+     * @return found {@link List} of persistent object
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     public List<T> getAll() throws DaoException {
         String query = String.format(SELECT_ALL, table);
         return executeQuery(query);
     }
 
+    /**
+     * Get the persistent object by id
+     *
+     * @param id the current id
+     * @return found {@link Optional} persistent object
+     */
     @Override
     public Optional<T> getById(Long id) throws DaoException {
         String query = String.format(SELECT_BY_ID, table);
         return executeForSingleResult(query, id);
     }
 
+    /**
+     * Update the parameter
+     *
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     protected void saveParametersItem(String query, Object... params) throws DaoException {
         try (PreparedStatement preparedStatement = createStatement(query, params)) {
             preparedStatement.executeUpdate();
@@ -60,6 +77,11 @@ public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDa
         }
     }
 
+    /**
+     * Save or update the persistent object
+     *
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public void save(T item) throws DaoException {
         Map<String, Object> parsed = entityExtractor.parse(item);
@@ -76,6 +98,11 @@ public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDa
         }
     }
 
+    /**
+     * Delete the  persistent object by id
+     *
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public void removeById(Long id) throws DaoException {
         try {

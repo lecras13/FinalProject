@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The {@code AbstractDao<T extends Entity>} presents basic method Data access object interface.
+ * The {@code AbstractDao<T extends Entity>} presents basic class data access object.
  *
  * @author Roman Alexandrov
  * @version 1.0
@@ -32,6 +32,12 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
         this.mapper = mapper;
     }
 
+    /**
+     * Executing query
+     *
+     * @param query the current query to execute
+     * @param params the current params to build query
+     */
     protected List<T> executeQuery(String query, Object... params) throws DaoException {
         try (PreparedStatement statement = createStatement(query, params);
              ResultSet resultSet = statement.executeQuery()) {
@@ -47,6 +53,12 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
         }
     }
 
+    /**
+     * Creating statement
+     *
+     * @param query the current query to execute
+     * @param params the current params to build query
+     */
     protected PreparedStatement createStatement(String query, Object... params) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
         for (int i = 1; i <= params.length; i++) {
@@ -55,6 +67,12 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
         return statement;
     }
 
+    /**
+     * Executing query for single result
+     *
+     * @param query the current query to execute
+     * @param params the current params to build query
+     */
     @Override
     public Optional<T> executeForSingleResult(String query, Object... params) throws DaoException {
         List<T> items = executeQuery(query, params);

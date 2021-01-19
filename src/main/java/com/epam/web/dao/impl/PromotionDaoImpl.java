@@ -8,6 +8,13 @@ import com.epam.web.mapper.impl.PromotionRowMapper;
 
 import java.sql.Connection;
 
+/**
+ * The {@code PromotionDaoImpl} presents promotion dao implementation
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class PromotionDaoImpl extends AbstractDaoPersistent<Promotion> implements PromotionDao {
     private static final String TABLE_NAME = "promotions";
     private static final String UPDATE = "UPDATE promotions SET promotion_name=?, start_date=?, end_date=?," +

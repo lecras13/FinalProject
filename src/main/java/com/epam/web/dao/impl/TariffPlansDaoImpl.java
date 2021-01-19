@@ -10,6 +10,13 @@ import com.epam.web.mapper.impl.TariffRowMapper;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * The {@code TariffPlansDaoImpl} presents tariff plans dao implementation
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class TariffPlansDaoImpl extends AbstractDaoPersistent<TariffPlan> implements TariffPlansDao {
     private static final String TABLE_NAME = "tariff_plans";
     private static final String UPDATE = "UPDATE tariff_plans SET tariff_name=?, price=?, description=? WHERE id=?";

@@ -10,6 +10,13 @@ import com.epam.web.mapper.impl.TariffRowMapper;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * The {@code PromotionDtoDaoImpl} presents promotion dto dao implementation
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class PromotionDtoDaoImpl extends AbstractDao<PromotionDto> implements PromotionDtoDao {
     private static final String GET_ALL_PROMOTION_DTO = "select promotions.*, tariff_plans.* from promotions " +
             "left join tariff_plans on promotions.tariff_id=tariff_plans.id limit ?, ?";

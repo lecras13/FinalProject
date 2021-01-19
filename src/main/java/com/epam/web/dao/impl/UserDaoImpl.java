@@ -11,6 +11,13 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code UserDaoImpl} presents user dao implementation
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class UserDaoImpl extends AbstractDaoPersistent<User> implements UserDao {
     private static final String FIND_BY_LOGIN_AND_PASSWORD = "select * from users where login=? and password=SHA1(?)";
     private static final String TABLE_NAME = "users";

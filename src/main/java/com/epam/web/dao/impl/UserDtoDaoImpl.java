@@ -11,6 +11,13 @@ import com.epam.web.mapper.impl.UserDtoRowMapper;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * The {@code UserDtoDaoImpl} presents user dto dao implementation
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class UserDtoDaoImpl extends AbstractDao<UserDto> implements UserDtoDao {
     private static final String GET_ALL_USER_DTO = "select users.id, users.login, users.password, users.first_name, " +
             "users.last_name, users.role, users.total_amount, users.status_block, users.traffic, users.discount," +

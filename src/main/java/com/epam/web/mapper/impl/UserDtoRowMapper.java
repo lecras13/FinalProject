@@ -3,11 +3,19 @@ package com.epam.web.mapper.impl;
 import com.epam.web.entity.Promotion;
 import com.epam.web.entity.Role;
 import com.epam.web.entity.TariffPlan;
+import com.epam.web.entity.User;
 import com.epam.web.entity.dto.UserDto;
 import com.epam.web.mapper.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+/**
+ * The {@code UserDtoRowMapper} class represents assembling an {@link UserDto} from the database.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class UserDtoRowMapper implements RowMapper<UserDto> {
     private static final String ID = "id";
@@ -30,6 +38,13 @@ public class UserDtoRowMapper implements RowMapper<UserDto> {
         this.promotionRowMapper = promotionRowMapper;
     }
 
+    /**
+     * Assembling an {@link UserDto} from the database {@link ResultSet}.
+     *
+     * @param resultSet represents the resulting dataset and provides the
+     *                  application with line-by-line access to query results.
+     * @throws SQLException the sql exception
+     */
     @Override
     public UserDto map(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ID);

@@ -6,6 +6,13 @@ import com.epam.web.extractor.EntityExtractor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * The {@code UserExtractor} class represents the implementation of writing {@link User} fields to the {@link Map}.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class UserExtractor implements EntityExtractor<User> {
     private static final String ID = "id";
     private static final String LOGIN = "login";
@@ -20,6 +27,11 @@ public class UserExtractor implements EntityExtractor<User> {
     private static final String TARIFF_ID = "tariff_id";
     private static final String PROMOTION_ID = "promotion_id";
 
+    /**
+     * Writing object {@link User} fields to the map
+     *
+     * @param user the current object {@link User}
+     */
     @Override
     public Map<String, Object> parse(User user) {
         Map<String, Object> result = new LinkedHashMap<>();

@@ -14,6 +14,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The {@code AbstractDaoPersistent<T extends Entity>} presents basic Data access object
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDao<T> implements DaoPersistent<T> {
     private static final Logger LOGGER = LogManager.getLogger(AbstractDaoPersistent.class);
     private final static String SELECT_BY_ID = "SELECT * FROM %s WHERE id = ?";

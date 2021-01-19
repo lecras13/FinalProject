@@ -14,6 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code AbstractDao<T extends Entity>} presents basic method Data access object interface.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public abstract class AbstractDao<T extends Entity> implements Dao<T> {
     private static final Logger LOGGER = LogManager.getLogger(AbstractDao.class);
 

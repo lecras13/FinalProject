@@ -1,11 +1,20 @@
 package com.epam.web.extractor.impl;
 
 import com.epam.web.entity.Promotion;
+import com.epam.web.entity.TariffPlan;
+import com.epam.web.entity.User;
 import com.epam.web.extractor.EntityExtractor;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+/**
+ * The {@code PromotionExtractor} class represents the implementation of writing {@link Promotion} fields to the {@link Map}.
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class PromotionExtractor implements EntityExtractor<Promotion> {
     private static final String ID = "id";
@@ -16,6 +25,11 @@ public class PromotionExtractor implements EntityExtractor<Promotion> {
     private static final String TARIFF_ID = "tariff_id";
     private static final String NEW_PRICE = "new_price";
 
+    /**
+     * Writing object {@link Promotion} fields to the map
+     *
+     * @param promotion the current object {@link Promotion}
+     */
     @Override
     public Map<String, Object> parse(Promotion promotion) {
         Map<String, Object> result = new LinkedHashMap<>();

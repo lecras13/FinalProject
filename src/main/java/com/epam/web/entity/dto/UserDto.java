@@ -7,6 +7,12 @@ import com.epam.web.entity.TariffPlan;
 
 import java.util.Objects;
 
+/**
+ * The {@code UserDto} presents combination user, promotion and tariff plan objects
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class UserDto implements Entity {
     private final Long id;

@@ -6,6 +6,13 @@ import com.epam.web.entity.TariffPlan;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * The {@code PromotionDto} presents combination promotion and tariff plan objects
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class PromotionDto implements Entity {
     private final Long id;
     private String promotionName;

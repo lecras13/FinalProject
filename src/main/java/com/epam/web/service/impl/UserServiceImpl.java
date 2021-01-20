@@ -6,12 +6,20 @@ import com.epam.web.dao.helper.DaoHelperFactory;
 import com.epam.web.entity.User;
 import com.epam.web.exception.DaoException;
 import com.epam.web.exception.ServiceException;
+import com.epam.web.service.UserDtoService;
 import com.epam.web.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
+
+/**
+ * The {@code UserServiceImpl} presents implementation {@link UserService}
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);

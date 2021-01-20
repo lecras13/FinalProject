@@ -6,11 +6,19 @@ import com.epam.web.dao.helper.DaoHelperFactory;
 import com.epam.web.entity.dto.PromotionDto;
 import com.epam.web.exception.DaoException;
 import com.epam.web.exception.ServiceException;
+import com.epam.web.service.PaymentService;
 import com.epam.web.service.PromotionDtoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+
+/**
+ * The {@code PromotionDtoServiceImpl} presents implementation {@link PromotionDtoService}
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class PromotionDtoServiceImpl implements PromotionDtoService {
     private static final Logger LOGGER = LogManager.getLogger(PromotionDtoServiceImpl.class);

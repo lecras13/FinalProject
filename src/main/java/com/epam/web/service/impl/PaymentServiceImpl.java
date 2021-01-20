@@ -17,6 +17,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code PaymentServiceImpl} presents implementation {@link PaymentService}
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class PaymentServiceImpl implements PaymentService {
     private static final Logger LOGGER = LogManager.getLogger(PaymentServiceImpl.class);
     private final DaoHelperFactory daoHelperFactory;

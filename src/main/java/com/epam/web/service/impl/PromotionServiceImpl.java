@@ -6,6 +6,7 @@ import com.epam.web.dao.helper.DaoHelperFactory;
 import com.epam.web.entity.Promotion;
 import com.epam.web.exception.DaoException;
 import com.epam.web.exception.ServiceException;
+import com.epam.web.service.PromotionDtoService;
 import com.epam.web.service.PromotionService;
 import com.epam.web.validator.Validator;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,13 @@ import org.apache.logging.log4j.Logger;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+/**
+ * The {@code PromotionServiceImpl} presents implementation {@link PromotionService}
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class PromotionServiceImpl implements PromotionService {
     private static final Logger LOGGER = LogManager.getLogger(PromotionServiceImpl.class);

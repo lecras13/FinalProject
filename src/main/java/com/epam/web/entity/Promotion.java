@@ -3,6 +3,13 @@ package com.epam.web.entity;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * The {@code Promotion} presents promotion object
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class Promotion implements Entity {
     private final Long id;
     private String promotionName;

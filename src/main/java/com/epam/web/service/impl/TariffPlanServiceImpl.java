@@ -6,6 +6,7 @@ import com.epam.web.dao.helper.DaoHelperFactory;
 import com.epam.web.entity.TariffPlan;
 import com.epam.web.exception.DaoException;
 import com.epam.web.exception.ServiceException;
+import com.epam.web.service.PromotionService;
 import com.epam.web.service.TariffPlanService;
 import com.epam.web.validator.Validator;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +14,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
+
+/**
+ * The {@code TariffPlanServiceImpl} presents implementation {@link TariffPlanService}
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class TariffPlanServiceImpl implements TariffPlanService {
     private static final Logger LOGGER = LogManager.getLogger(TariffPlanServiceImpl.class);

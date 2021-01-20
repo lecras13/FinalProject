@@ -2,6 +2,13 @@ package com.epam.web.entity;
 
 import java.util.Objects;
 
+/**
+ * The {@code User} presents user object
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class User implements Entity {
     private final Long id;
     private String login;

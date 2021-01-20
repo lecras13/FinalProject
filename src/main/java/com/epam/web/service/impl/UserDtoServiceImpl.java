@@ -7,11 +7,19 @@ import com.epam.web.entity.dto.UserDto;
 import com.epam.web.exception.ConnectionPoolException;
 import com.epam.web.exception.DaoException;
 import com.epam.web.exception.ServiceException;
+import com.epam.web.service.TariffPlanService;
 import com.epam.web.service.UserDtoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+
+/**
+ * The {@code UserDtoServiceImpl} presents implementation {@link UserDtoService}
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
 
 public class UserDtoServiceImpl implements UserDtoService {
     private static final Logger LOGGER = LogManager.getLogger(UserDtoServiceImpl.class);

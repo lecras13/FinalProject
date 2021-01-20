@@ -2,6 +2,13 @@ package com.epam.web.entity;
 
 import java.util.Objects;
 
+/**
+ * The {@code TariffPlan} presents tariff plan object
+ *
+ * @author Roman Alexandrov
+ * @version 1.0
+ */
+
 public class TariffPlan implements Entity {
     private final Long id;
     private String tariffName;

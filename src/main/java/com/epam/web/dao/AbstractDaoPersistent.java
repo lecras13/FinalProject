@@ -64,7 +64,7 @@ public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDa
     }
 
     /**
-     * Update the parameter
+     * Update the parameters
      *
      * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
      */
@@ -86,15 +86,10 @@ public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDa
     public void save(T item) throws DaoException {
         Map<String, Object> parsed = entityExtractor.parse(item);
         Object[] values = (parsed.values()).toArray();
-        try {
-            if (item.getId() == null) {
-                createStatement(saveQuery, values).executeUpdate();
-            } else {
-                createStatement(updateQuery, values).executeUpdate();
-            }
-        } catch (SQLException e) {
-            LOGGER.error("SQLException when saving entity!");
-            throw new DaoException(e);
+        if (item.getId() == null) {
+            saveParametersItem(saveQuery, values);
+        } else {
+            saveParametersItem(updateQuery, values);
         }
     }
 
@@ -105,9 +100,9 @@ public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDa
      */
     @Override
     public void removeById(Long id) throws DaoException {
-        try {
-            String query = String.format(DELETE_BY_ID, table);
-            createStatement(query, id).executeUpdate();
+        String query = String.format(DELETE_BY_ID, table);
+        try (PreparedStatement preparedStatement = createStatement(query, id)) {
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("SQLException when removing entity!");
             throw new DaoException(e);

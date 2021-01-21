@@ -38,7 +38,7 @@ public interface PromotionService {
      * @param newPrice      new price
      * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
      */
-    void savePromotion(Long id, String promotionName, Date startDate, Date endDate, String description, Long tariffPlanId, Integer newPrice) throws ServiceException;
+    void savePromotion(Long id, String promotionName, Date startDate, Date endDate, String description, Long tariffPlanId, Integer newPrice, Boolean status) throws ServiceException;
 
     /**
      * Delete the promotion by id

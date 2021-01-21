@@ -24,6 +24,7 @@ public class PromotionExtractor implements EntityExtractor<Promotion> {
     private static final String DESCRIPTION = "prescription";
     private static final String TARIFF_ID = "tariff_id";
     private static final String NEW_PRICE = "new_price";
+    private static final String STATUS = "status";
 
     /**
      * Writing object {@link Promotion} fields to the map
@@ -40,6 +41,7 @@ public class PromotionExtractor implements EntityExtractor<Promotion> {
         String description = promotion.getDescription();
         Long tariffPlanId = promotion.getTariffPlanId();
         Integer newPrice = promotion.getNewPrice();
+        Boolean status = promotion.getStatus();
 
         result.put(PROMOTION_NAME, promotionName);
         result.put(START_DATE, startDate);
@@ -47,6 +49,7 @@ public class PromotionExtractor implements EntityExtractor<Promotion> {
         result.put(DESCRIPTION, description);
         result.put(TARIFF_ID, tariffPlanId);
         result.put(NEW_PRICE, newPrice);
+        result.put(STATUS, status);
         result.put(ID, id);
         return result;
     }

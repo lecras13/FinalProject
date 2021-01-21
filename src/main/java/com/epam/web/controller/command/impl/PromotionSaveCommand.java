@@ -37,6 +37,7 @@ public class PromotionSaveCommand implements Command {
     private static final String ERROR_MESSAGE_ATTRIBUTE = "errorMessageData";
     private static final String ERROR_MESSAGE = "Wrong data!";
     private static final String TARIFF_PLANS = "tariffs";
+    private static final String STATUS = "status";
     private static final String TIME_ZONE = "Europe/London";
     private static final String EMPTY_STRING = "";
 
@@ -74,9 +75,10 @@ public class PromotionSaveCommand implements Command {
         String description = servletRequest.getParameter(DESCRIPTION);
         Long tariffPlanId = Long.parseLong(servletRequest.getParameter(TARIFF_ID));
         Integer newPrice = Integer.parseInt(servletRequest.getParameter(NEW_PRICE));
+        Boolean status = Boolean.valueOf(servletRequest.getParameter(STATUS));
 
         try {
-            promotionService.savePromotion(id, promotionName, startDate, endDate, description, tariffPlanId, newPrice);
+            promotionService.savePromotion(id, promotionName, startDate, endDate, description, tariffPlanId, newPrice,status);
         } catch (ServiceException e) {
             servletRequest.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE);
             List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlans();

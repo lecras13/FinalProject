@@ -22,6 +22,7 @@ public class PromotionDtoRowMapper implements RowMapper<PromotionDto> {
     private static final String END_DATE = "end_date";
     private static final String DESCRIPTION = "description";
     private static final String NEW_PRICE = "new_price";
+    private static final String STATUS = "status";
 
     private final RowMapper<TariffPlan> tariffRowMapper;
 
@@ -45,6 +46,7 @@ public class PromotionDtoRowMapper implements RowMapper<PromotionDto> {
         String description = resultSet.getString(DESCRIPTION);
         TariffPlan tariffPlan = tariffRowMapper.map(resultSet);
         Integer newPrice = resultSet.getInt(NEW_PRICE);
-        return new PromotionDto(id, promotionName, startDate, endDate, description, tariffPlan, newPrice);
+        Boolean block = resultSet.getBoolean(STATUS);
+        return new PromotionDto(id, promotionName, startDate, endDate, description, tariffPlan, newPrice,block);
     }
 }

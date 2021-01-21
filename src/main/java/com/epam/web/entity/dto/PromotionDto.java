@@ -21,8 +21,9 @@ public class PromotionDto implements Entity {
     private String description;
     private TariffPlan tariffPlan;
     private Integer newPrice;
+    private Boolean status;
 
-    public PromotionDto(Long id, String promotionName, Date startDate, Date endDate, String description, TariffPlan tariffPlan, Integer newPrice) {
+    public PromotionDto(Long id, String promotionName, Date startDate, Date endDate, String description, TariffPlan tariffPlan, Integer newPrice, Boolean status) {
         this.id = id;
         this.promotionName = promotionName;
         this.startDate = startDate;
@@ -30,6 +31,15 @@ public class PromotionDto implements Entity {
         this.description = description;
         this.tariffPlan = tariffPlan;
         this.newPrice = newPrice;
+        this.status = status;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     @Override

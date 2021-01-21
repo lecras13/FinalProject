@@ -46,10 +46,10 @@ public class PromotionServiceImpl implements PromotionService {
     }
 
     @Override
-    public void savePromotion(Long id, String promotionName, Date startDate, Date endDate, String description, Long tariffPlanId, Integer newPrice) throws ServiceException {
+    public void savePromotion(Long id, String promotionName, Date startDate, Date endDate, String description, Long tariffPlanId, Integer newPrice, Boolean status) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             PromotionDao dao = factory.createPromotionDao();
-            Promotion promotion = new Promotion(id, promotionName, startDate, endDate, description, tariffPlanId, newPrice);
+            Promotion promotion = new Promotion(id, promotionName, startDate, endDate, description, tariffPlanId, newPrice, status);
             if (!promotionValidator.isValid(promotion)) {
                 LOGGER.error("Promotion not valid!");
                 throw new ServiceException();

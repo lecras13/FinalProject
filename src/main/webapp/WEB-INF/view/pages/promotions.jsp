@@ -41,6 +41,7 @@
                     <th><fmt:message key="tariff.name"/></th>
                     <th><fmt:message key="promotion.new.price"/></th>
                     <c:if test="${sessionScope.userRole eq 'ADMIN'}">
+                        <th><fmt:message key="status"/></th>
                         <th><fmt:message key="button.edit"/></th>
                     </c:if>
                 </tr>
@@ -69,9 +70,21 @@
                             </c:choose>
                         </td>
                         <td><c:out value="${promotion.description}"/></td>
-                        <td><c:out value="${promotion.tariffPlan.tariffName}"/></td>
+                        <td><c:out value="${promotion.tariffPlan.tariffName}"/>
+                           <%-- <c:out value="${tariffPlan.id}"/>
+                            <c:out value="${promotion.tariffPlan.block}"/>
+                            <c:out value="${promotion.tariffPlan.price}"/>--%>
+                        </td>
                         <td><c:out value="${promotion.newPrice}"/></td>
                         <c:if test="${sessionScope.userRole eq 'ADMIN'}">
+                            <td>
+                                <c:if test="${promotion.status eq 'TRUE'}">
+                                    <fmt:message key="status.block"/>
+                                </c:if>
+                                <c:if test="${promotion.status eq 'FALSE'}">
+                                    <fmt:message key="status.unblock"/>
+                                </c:if>
+                            </td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/controller?command=promotions-edit"
                                       method=POST>
@@ -80,18 +93,18 @@
                                     <input type="hidden" name="start_date" value="${promotion.startDate}">
                                     <input type="hidden" name="end_date" value="${promotion.endDate}">
                                     <input type="hidden" name="description" value="${promotion.description}">
-                                    <input type="hidden" name="tariff_id"
-                                           value="<c:out value="${promotion.tariffPlan.id}"/>">
+                                    <input type="hidden" name="status" value="${promotion.status}">
+                                    <input type="hidden" name="tariff_id" value="<c:out value="${promotion.tariffPlan.id}"/>">
                                     <input type="hidden" name="new_price" value="${promotion.newPrice}">
                                     <input type="submit" value="<fmt:message key="button.edit"/>">
                                 </form>
-                                <form action="${pageContext.request.contextPath}/controller?command=promotions-delete"
+                               <%-- <form action="${pageContext.request.contextPath}/controller?command=promotions-delete"
                                       method=POST>
                                     <input type="hidden" name="id" value="${promotion.id}">
                                     <input type="hidden" name="tariff_id"
                                            value="<c:out value="${promotion.tariffPlan.id}"/>">
                                     <input type="submit" value="<fmt:message key="button.delete"/>">
-                                </form>
+                                </form>--%>
                             </td>
                         </c:if>
                     </tr>

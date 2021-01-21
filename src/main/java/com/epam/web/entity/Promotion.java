@@ -18,6 +18,7 @@ public class Promotion implements Entity {
     private String description;
     private Long tariffPlanId;
     private Integer newPrice;
+    private Boolean status;
 
     public Promotion(Long id, String promotionName, Date startDate, Date endDate, String description, Long tariffPlanId, Integer newPrice) {
         this.id = id;
@@ -27,6 +28,25 @@ public class Promotion implements Entity {
         this.description = description;
         this.tariffPlanId = tariffPlanId;
         this.newPrice = newPrice;
+    }
+
+    public Promotion(Long id, String promotionName, Date startDate, Date endDate, String description, Long tariffPlanId, Integer newPrice, Boolean status) {
+        this.id = id;
+        this.promotionName = promotionName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
+        this.tariffPlanId = tariffPlanId;
+        this.newPrice = newPrice;
+        this.status = status;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     @Override

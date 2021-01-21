@@ -48,7 +48,12 @@
                     <td>
                         <select name="select_tariff">
                             <c:forEach items="${tariffs}" var="tariff">
-                                <option value="${tariff.id}"> ${tariff.tariffName} </option>
+                                <c:if test="${tariff.id eq tariff_id}">
+                                    <option value="${tariff.id}" selected> ${tariff.tariffName} </option>
+                                </c:if>
+                                <c:if test="${!(tariff.id eq tariff_id)}">
+                                    <option value="${tariff.id}"> ${tariff.tariffName} </option>
+                                </c:if>
                             </c:forEach>
                         </select>
                     </td>
@@ -58,6 +63,19 @@
                     <td><input type="text" id="newPrice" name="new-price" value="${new_price}"></td>
                 </tr>
                 <tr>
+                    <td><fmt:message key="status"/></td>
+                    <td>
+                        <c:if test="${status eq true}">
+                            <input type="radio" name="status" value="TRUE" checked><fmt:message key="status.blocked"/>
+                            <input type="radio" name="status" value="FALSE"><fmt:message
+                                key="status.unblocked"/><br>
+                        </c:if>
+                        <c:if test="${!status eq true}">
+                            <input type="radio" name="status" value="TRUE"><fmt:message key="status.blocked"/>
+                            <input type="radio" name="status" value="FALSE" checked><fmt:message
+                                key="status.unblocked"/><br>
+                        </c:if>
+                    </td>
                 </tr>
                 <tr>
                     <td>

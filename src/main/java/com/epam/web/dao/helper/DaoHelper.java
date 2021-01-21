@@ -134,6 +134,14 @@ public class DaoHelper implements AutoCloseable {
         } catch (SQLException e) {
             LOGGER.error("SQLException when starting commit!");
             throw new DaoException(e);
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                LOGGER.error(e.toString());
+            }
         }
     }
 }

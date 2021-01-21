@@ -20,7 +20,7 @@ import java.util.List;
 public class TariffPlansDaoImpl extends AbstractDaoPersistent<TariffPlan> implements TariffPlansDao {
     private static final String TABLE_NAME = "tariff_plans";
     private static final String UPDATE = "UPDATE tariff_plans SET tariff_name=?, price=?, description=?, status=? WHERE id=?";
-    private static final String SAVE = "INSERT INTO tariff_plans(tariff_name, price, description, id) VALUES(?, ?, ?, ?)";
+    private static final String SAVE = "INSERT INTO tariff_plans(tariff_name, price, description, status, id) VALUES(?, ?, ?, ?, ?)";
     private static final String GET_FOR_TABLE = "SELECT * FROM tariff_plans limit ?, ?";
     private static final String GET_FOR_TABLE_ACTIVE = "SELECT * FROM tariff_plans WHERE status=0 limit ?, ?";
     private static final String GET_ACTIVE = "SELECT * FROM tariff_plans WHERE status=0";

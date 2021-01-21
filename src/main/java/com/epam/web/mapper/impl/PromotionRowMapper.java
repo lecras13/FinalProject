@@ -1,7 +1,6 @@
 package com.epam.web.mapper.impl;
 
 import com.epam.web.entity.Promotion;
-import com.epam.web.entity.TariffPlan;
 import com.epam.web.mapper.RowMapper;
 
 import java.sql.ResultSet;
@@ -23,6 +22,7 @@ public class PromotionRowMapper implements RowMapper<Promotion> {
     private static final String DESCRIPTION = "description";
     private static final String TARIFF_ID = "tariff_id";
     private static final String NEW_PRICE = "new_price";
+    private static final String STATUS = "status";
 
     /**
      * Assembling an {@link Promotion} from the database {@link ResultSet}.
@@ -40,6 +40,7 @@ public class PromotionRowMapper implements RowMapper<Promotion> {
         String description = resultSet.getString(DESCRIPTION);
         Long tariffPlanId = resultSet.getLong(TARIFF_ID);
         Integer newPrice = resultSet.getInt(NEW_PRICE);
-        return new Promotion(id, promotionName, startDate, endDate, description, tariffPlanId, newPrice);
+        Boolean block = resultSet.getBoolean(STATUS);
+        return new Promotion(id, promotionName, startDate, endDate, description, tariffPlanId, newPrice, block);
     }
 }

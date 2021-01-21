@@ -27,6 +27,7 @@ public class PromotionEditCommand implements Command {
     private static final String TARIFF_ID = "tariff_id";
     private static final String NEW_PRICE = "new_price";
     private static final String TARIFF_PLANS = "tariffs";
+    private static final String STATUS = "status";
 
     private final TariffPlanServiceImpl tariffPlanService;
 
@@ -54,6 +55,7 @@ public class PromotionEditCommand implements Command {
             String description = servletRequest.getParameter(DESCRIPTION);
             String tariffId = servletRequest.getParameter(TARIFF_ID);
             String newPrice = servletRequest.getParameter(NEW_PRICE);
+            String status = servletRequest.getParameter(STATUS);
 
             servletRequest.setAttribute(ID, id);
             servletRequest.setAttribute(PROMOTION_NAME, promotionName);
@@ -62,6 +64,7 @@ public class PromotionEditCommand implements Command {
             servletRequest.setAttribute(DESCRIPTION, description);
             servletRequest.setAttribute(TARIFF_ID, tariffId);
             servletRequest.setAttribute(NEW_PRICE, newPrice);
+            servletRequest.setAttribute(STATUS, status);
         }
         List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlansOnlyActive();
         servletRequest.setAttribute(TARIFF_PLANS, tariffPlans);

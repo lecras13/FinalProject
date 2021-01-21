@@ -14,6 +14,15 @@ public class TariffPlan implements Entity {
     private String tariffName;
     private Integer price;
     private String description;
+    private Boolean block;
+
+    public TariffPlan(Long id, String tariffName, Integer price, String description, Boolean block) {
+        this.id = id;
+        this.tariffName = tariffName;
+        this.price = price;
+        this.description = description;
+        this.block = block;
+    }
 
     public TariffPlan(Long id, String tariffName, Integer price, String description) {
         this.id = id;
@@ -51,6 +60,14 @@ public class TariffPlan implements Entity {
         this.description = description;
     }
 
+    public Boolean getBlock() {
+        return block;
+    }
+
+    public void setBlock(Boolean block) {
+        this.block = block;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,7 +78,8 @@ public class TariffPlan implements Entity {
         if (!Objects.equals(id, that.id)) return false;
         if (!Objects.equals(tariffName, that.tariffName)) return false;
         if (!Objects.equals(price, that.price)) return false;
-        return Objects.equals(description, that.description);
+        if (!Objects.equals(description, that.description)) return false;
+        return Objects.equals(block, that.block);
     }
 
     @Override
@@ -70,6 +88,7 @@ public class TariffPlan implements Entity {
         result = 31 * result + (tariffName != null ? tariffName.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (block != null ? block.hashCode() : 0);
         return result;
     }
 
@@ -80,6 +99,7 @@ public class TariffPlan implements Entity {
                 ", tariffName='" + tariffName + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
+                ", block=" + block +
                 '}';
     }
 }

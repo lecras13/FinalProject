@@ -3,12 +3,14 @@ package com.epam.web.controller.command.impl;
 import com.epam.web.controller.command.Command;
 import com.epam.web.controller.command.CommandResult;
 import com.epam.web.controller.command.PageController;
+import com.epam.web.entity.Role;
 import com.epam.web.entity.TariffPlan;
 import com.epam.web.exception.ServiceException;
 import com.epam.web.service.TariffPlanService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -24,6 +26,7 @@ public class TariffPlansCommand implements Command {
     private static final int RECORDS_ON_PAGE = 5;
     private static final String NO_OF_PAGES = "noOfPages";
     private static final String CURRENT_PAGE = "currentPage";
+    private final static String SESSION_ROLE = "userRole";
 
     private final TariffPlanService tariffPlanService;
     private final PageController pageController;
@@ -45,7 +48,19 @@ public class TariffPlansCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
         int currentPage = pageController.getCurrentPage(servletRequest);
-        List<TariffPlan> tariffPlansForPage = tariffPlanService.getTariffPlansForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+        List<TariffPlan> tariffPlansForPage;
+        HttpSession session = servletRequest.getSession();
+
+        if (session.getAttribute(SESSION_ROLE) == null) {
+            tariffPlansForPage = tariffPlanService.getTariffPlansOnlyActiveForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+        } else {
+            Role mainRole = (Role) session.getAttribute(SESSION_ROLE);
+            if (mainRole.equals(Role.ADMIN)) {
+                tariffPlansForPage = tariffPlanService.getTariffPlansForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+            } else {
+                tariffPlansForPage = tariffPlanService.getTariffPlansOnlyActiveForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+            }
+        }
 
         int numberOfRecords = tariffPlanService.getTariffPlans().size();
         int numberPages = pageController.getNumberPages(numberOfRecords, RECORDS_ON_PAGE);

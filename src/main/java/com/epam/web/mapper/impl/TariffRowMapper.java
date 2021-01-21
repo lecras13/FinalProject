@@ -20,6 +20,7 @@ public class TariffRowMapper implements RowMapper<TariffPlan> {
     private static final String TARIFF_NAME = "tariff_name";
     private static final String PRICE = "price";
     private static final String DESCRIPTION = "description";
+    private static final String STATUS = "status";
 
     /**
      * Assembling an {@link TariffPlan} from the database {@link ResultSet}.
@@ -34,6 +35,7 @@ public class TariffRowMapper implements RowMapper<TariffPlan> {
         String tariffName = resultSet.getString(TARIFF_NAME);
         Integer price = resultSet.getInt(PRICE);
         String description = resultSet.getString(DESCRIPTION);
-        return new TariffPlan(id, tariffName, price, description);
+        Boolean block = resultSet.getBoolean(STATUS);
+        return new TariffPlan(id, tariffName, price, description, block);
     }
 }

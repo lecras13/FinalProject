@@ -91,4 +91,15 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public List<TariffPlan> getTariffPlansOnlyActiveForPage(int firstRow, int rowCount) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            TariffPlansDao dao = factory.createTariffDao();
+            return dao.getTariffPlansOnlyActiveForPage(firstRow, rowCount);
+        } catch (DaoException e) {
+            LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
+            throw new ServiceException(e);
+        }
+    }
 }

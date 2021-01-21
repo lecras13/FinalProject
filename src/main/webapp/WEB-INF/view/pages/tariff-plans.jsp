@@ -31,6 +31,7 @@
                     <th><fmt:message key="tariff.price"/></th>
                     <th><fmt:message key="tariff.description"/></th>
                     <c:if test="${sessionScope.userRole eq 'ADMIN'}">
+                        <th><fmt:message key="status"/></th>
                         <th><fmt:message key="button.edit"/></th>
                     </c:if>
                 </tr>
@@ -43,6 +44,14 @@
                         <td><c:out value="${tariff.description}"/></td>
 
                         <c:if test="${sessionScope.userRole eq 'ADMIN'}">
+                            <td>
+                                <c:if test="${tariff.block eq 'TRUE'}">
+                                    <fmt:message key="status.block"/>
+                                </c:if>
+                                <c:if test="${tariff.block eq 'FALSE'}">
+                                    <fmt:message key="status.unblock"/>
+                                </c:if>
+                            </td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/controller?command=tariffs-edit"
                                       method="POST">

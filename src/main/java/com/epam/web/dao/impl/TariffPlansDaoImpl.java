@@ -22,6 +22,7 @@ public class TariffPlansDaoImpl extends AbstractDaoPersistent<TariffPlan> implem
     private static final String UPDATE = "UPDATE tariff_plans SET tariff_name=?, price=?, description=? WHERE id=?";
     private static final String SAVE = "INSERT INTO tariff_plans(tariff_name, price, description, id) VALUES(?, ?, ?, ?)";
     private static final String GET_FOR_TABLE = "SELECT * FROM tariff_plans limit ?, ?";
+    private static final String GET_FOR_TABLE_ACTIVE = "SELECT * FROM tariff_plans WHERE status=0 limit ?, ?";
 
     public TariffPlansDaoImpl(Connection connection) {
         super(connection, new TariffRowMapper(), new TariffPlanExtractor(), TABLE_NAME, SAVE, UPDATE);
@@ -30,5 +31,10 @@ public class TariffPlansDaoImpl extends AbstractDaoPersistent<TariffPlan> implem
     @Override
     public List<TariffPlan> getTariffPlansForPage(int firstRow, int rowCount) throws DaoException {
         return executeQuery(GET_FOR_TABLE, firstRow, rowCount);
+    }
+
+    @Override
+    public List<TariffPlan> getTariffPlansOnlyActiveForPage(int firstRow, int rowCount) throws DaoException {
+        return executeQuery(GET_FOR_TABLE_ACTIVE, firstRow, rowCount);
     }
 }

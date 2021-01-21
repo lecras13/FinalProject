@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS tariff_plans (
    id    BIGINT              NOT NULL PRIMARY KEY AUTO_INCREMENT,
    tariff_name  VARCHAR(15)  NOT NULL,
    price DOUBLE              NOT NULL,
-   description  TEXT(500)   NOT NULL 
+   description  TEXT(500)   NOT NULL,
+   status BIT     DEFAULT 0
  );
 
 CREATE TABLE IF NOT EXISTS payments (

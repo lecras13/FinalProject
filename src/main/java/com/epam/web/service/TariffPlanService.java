@@ -42,7 +42,7 @@ public interface TariffPlanService {
      * @param description new description
      * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
      */
-    void saveTariffPlan(Long id, String tariffName, Integer price, String description) throws ServiceException;
+    void saveTariffPlan(Long id, String tariffName, Integer price, String description, Boolean status) throws ServiceException;
 
     /**
      * Delete the tariff plan by id
@@ -70,4 +70,12 @@ public interface TariffPlanService {
      * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
      */
     List<TariffPlan> getTariffPlansOnlyActiveForPage(int firstRow, int rowCount) throws ServiceException;
+
+    /**
+     * Get the tariff plans list only active
+     *
+     * @return found {@link List} of tariff plans only active
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
+    List<TariffPlan> getTariffPlansOnlyActive() throws ServiceException;
 }

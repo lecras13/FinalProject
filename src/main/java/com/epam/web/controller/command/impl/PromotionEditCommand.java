@@ -63,7 +63,7 @@ public class PromotionEditCommand implements Command {
             servletRequest.setAttribute(TARIFF_ID, tariffId);
             servletRequest.setAttribute(NEW_PRICE, newPrice);
         }
-        List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlans();
+        List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlansOnlyActive();
         servletRequest.setAttribute(TARIFF_PLANS, tariffPlans);
 
         return CommandResult.forward(PROMOTIONS_EDIT_LOCATION);

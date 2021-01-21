@@ -81,7 +81,7 @@ public class UserEditCommand implements Command {
         servletRequest.setAttribute(TARIFF_ID, tariffId);
         servletRequest.setAttribute(PROMOTION_ID, promotionId);
 
-        List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlans();
+        List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlansOnlyActive();
         servletRequest.setAttribute(TARIFF_PLANS, tariffPlans);
 
         return CommandResult.forward(USER_EDIT_LOCATION);

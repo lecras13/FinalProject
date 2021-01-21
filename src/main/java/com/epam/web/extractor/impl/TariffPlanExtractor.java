@@ -19,6 +19,7 @@ public class TariffPlanExtractor implements EntityExtractor<TariffPlan> {
     private static final String TARIFF_NAME = "tariff-name";
     private static final String PRICE = "price";
     private static final String DESCRIPTION = "description";
+    private static final String STATUS = "status";
 
     /**
      * Writing object {@link TariffPlan} fields to the map
@@ -32,10 +33,12 @@ public class TariffPlanExtractor implements EntityExtractor<TariffPlan> {
         String tariffName = tariffPlan.getTariffName();
         Integer price = tariffPlan.getPrice();
         String description = tariffPlan.getDescription();
+        Boolean status = tariffPlan.getBlock();
 
         result.put(TARIFF_NAME, tariffName);
         result.put(PRICE, price);
         result.put(DESCRIPTION, description);
+        result.put(STATUS, status);
         result.put(ID, id);
         return result;
     }

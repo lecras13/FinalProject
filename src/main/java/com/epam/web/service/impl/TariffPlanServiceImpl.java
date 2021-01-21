@@ -44,10 +44,10 @@ public class TariffPlanServiceImpl implements TariffPlanService {
     }
 
     @Override
-    public void saveTariffPlan(Long id, String tariffName, Integer price , String description) throws ServiceException {
+    public void saveTariffPlan(Long id, String tariffName, Integer price , String description, Boolean status) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             TariffPlansDao dao = factory.createTariffDao();
-            TariffPlan tariffPlan = new TariffPlan(id, tariffName, price, description);
+            TariffPlan tariffPlan = new TariffPlan(id, tariffName, price, description, status);
             if (!tariffPlanValidator.isValid(tariffPlan)) {
                 LOGGER.error("TariffPlan not valid!");
                 throw new ServiceException();
@@ -97,6 +97,17 @@ public class TariffPlanServiceImpl implements TariffPlanService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             TariffPlansDao dao = factory.createTariffDao();
             return dao.getTariffPlansOnlyActiveForPage(firstRow, rowCount);
+        } catch (DaoException e) {
+            LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<TariffPlan> getTariffPlansOnlyActive() throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            TariffPlansDao dao = factory.createTariffDao();
+            return dao.getTariffPlansOnlyActive();
         } catch (DaoException e) {
             LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
             throw new ServiceException(e);

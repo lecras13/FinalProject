@@ -20,8 +20,9 @@ public class TariffPlanEditCommand implements Command {
     private static final String TARIFF_NAME = "tariff";
     private static final String PRICE = "price";
     private static final String DESCRIPTION = "description";
+    private static final String STATUS = "status";
 
-    public TariffPlanEditCommand() {
+    public TariffPlanEditCommand(){
     }
 
     /**
@@ -33,17 +34,19 @@ public class TariffPlanEditCommand implements Command {
      * @return {@link CommandResult} object navigate to the page
      */
     @Override
-    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse){
         if (servletRequest.getParameter(ID) != null) {
             Long id = Long.parseLong(servletRequest.getParameter(ID));
             String tariffName = servletRequest.getParameter(TARIFF_NAME);
             Integer price = Integer.parseInt(servletRequest.getParameter(PRICE));
             String description = servletRequest.getParameter(DESCRIPTION);
+            String status = servletRequest.getParameter(STATUS);
 
             servletRequest.setAttribute(ID, id);
             servletRequest.setAttribute(TARIFF_NAME, tariffName);
             servletRequest.setAttribute(PRICE, price);
             servletRequest.setAttribute(DESCRIPTION, description);
+            servletRequest.setAttribute(STATUS, status);
         }
         return CommandResult.forward(TARIFF_EDIT_LOCATION);
     }

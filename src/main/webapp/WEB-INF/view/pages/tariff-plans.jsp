@@ -59,13 +59,14 @@
                                     <input type="hidden" name="tariff" value="${tariff.tariffName}">
                                     <input type="hidden" name="price" value="${tariff.price}">
                                     <input type="hidden" name="description" value="${tariff.description}">
+                                    <input type="hidden" name="status" value="${tariff.block}">
                                     <input type="submit" value="<fmt:message key="button.edit"/>">
                                 </form>
-                                <form action="${pageContext.request.contextPath}/controller?command=tariffs-delete"
+                               <%-- <form action="${pageContext.request.contextPath}/controller?command=tariffs-delete"
                                       method=POST>
                                     <input type="hidden" name="tariff_id" value="<c:out value="${tariff.id}"/>"/>
                                     <input type="submit" value="<fmt:message key="button.delete"/>">
-                                </form>
+                                </form>--%>
                             </td>
                         </c:if>
                     </tr>

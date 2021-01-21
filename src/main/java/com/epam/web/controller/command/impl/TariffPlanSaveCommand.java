@@ -22,6 +22,7 @@ public class TariffPlanSaveCommand implements Command {
     private static final String TARIFF_NAME = "tariff";
     private static final String PRICE = "price";
     private static final String DESCRIPTION = "description";
+    private static final String STATUS = "status";
     private static final String EMPTY_STRING = "";
     private static final String ERROR_MESSAGE_ATTRIBUTE = "errorMessageData";
     private static final String ERROR_MESSAGE = "Wrong data!";
@@ -47,9 +48,10 @@ public class TariffPlanSaveCommand implements Command {
         String tariffName = servletRequest.getParameter(TARIFF_NAME);
         Integer price = Integer.parseInt(servletRequest.getParameter(PRICE));
         String description = servletRequest.getParameter(DESCRIPTION);
+        Boolean status =Boolean.valueOf(servletRequest.getParameter(STATUS));
 
         try {
-            service.saveTariffPlan(id, tariffName, price, description);
+            service.saveTariffPlan(id, tariffName, price, description, status);
         } catch (ServiceException e) {
             servletRequest.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE);
             return CommandResult.forward(TARIFF_EDIT_LOCATION);

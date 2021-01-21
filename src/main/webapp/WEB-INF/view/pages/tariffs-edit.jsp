@@ -41,6 +41,21 @@
                     <td><textarea id="description" name="description">${description}</textarea>
                 </tr>
                 <tr>
+                    <td><fmt:message key="status"/></td>
+                    <td>
+                        <c:if test="${status eq true}">
+                            <input type="radio" name="status" value="TRUE" checked><fmt:message key="status.blocked"/>
+                            <input type="radio" name="status" value="FALSE"><fmt:message
+                                key="status.unblocked"/><br>
+                        </c:if>
+                        <c:if test="${!status eq true}">
+                            <input type="radio" name="status" value="TRUE"><fmt:message key="status.blocked"/>
+                            <input type="radio" name="status" value="FALSE" checked><fmt:message
+                                key="status.unblocked"/><br>
+                        </c:if>
+                    </td>
+                </tr>
+                <tr>
                     <td><p> ${errorMessageData}</p></td>
                     <td></td>
                 </tr>

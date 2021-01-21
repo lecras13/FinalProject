@@ -31,7 +31,7 @@ public class TariffPlansCommand implements Command {
     private final TariffPlanService tariffPlanService;
     private final PageController pageController;
 
-    public TariffPlansCommand(TariffPlanService service, PageController pageController) {
+    public TariffPlansCommand(TariffPlanService service, PageController pageController){
         this.tariffPlanService = service;
         this.pageController = pageController;
     }
@@ -46,20 +46,16 @@ public class TariffPlansCommand implements Command {
      * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
      */
     @Override
-    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException{
         int currentPage = pageController.getCurrentPage(servletRequest);
         List<TariffPlan> tariffPlansForPage;
         HttpSession session = servletRequest.getSession();
+        Role mainRole = (Role) session.getAttribute(SESSION_ROLE);
 
-        if (session.getAttribute(SESSION_ROLE) == null) {
+        if ((session.getAttribute(SESSION_ROLE) == null) || (mainRole.equals(Role.USER))) {
             tariffPlansForPage = tariffPlanService.getTariffPlansOnlyActiveForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
         } else {
-            Role mainRole = (Role) session.getAttribute(SESSION_ROLE);
-            if (mainRole.equals(Role.ADMIN)) {
-                tariffPlansForPage = tariffPlanService.getTariffPlansForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
-            } else {
-                tariffPlansForPage = tariffPlanService.getTariffPlansOnlyActiveForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
-            }
+            tariffPlansForPage = tariffPlanService.getTariffPlansForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
         }
 
         int numberOfRecords = tariffPlanService.getTariffPlans().size();

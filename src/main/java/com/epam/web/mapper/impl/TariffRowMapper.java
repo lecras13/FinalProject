@@ -38,4 +38,21 @@ public class TariffRowMapper implements RowMapper<TariffPlan> {
         Boolean block = resultSet.getBoolean(STATUS);
         return new TariffPlan(id, tariffName, price, description, block);
     }
+
+    /**
+     * Assembling an {@link TariffPlan} from the database {@link ResultSet}.
+     *
+     * @param resultSet represents the resulting dataset and provides the
+     *                  application with line-by-line access to query results.
+     * @throws SQLException the sql exception
+     */
+
+    public TariffPlan map(ResultSet resultSet, Long tariffId) throws SQLException{
+        Long id = tariffId;
+        String tariffName = resultSet.getString(TARIFF_NAME);
+        Integer price = resultSet.getInt(PRICE);
+        String description = resultSet.getString(DESCRIPTION);
+        Boolean block = resultSet.getBoolean(STATUS);
+        return new TariffPlan(id, tariffName, price, description, block);
+    }
 }

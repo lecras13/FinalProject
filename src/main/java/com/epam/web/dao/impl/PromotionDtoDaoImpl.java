@@ -25,7 +25,7 @@ public class PromotionDtoDaoImpl extends AbstractDao<PromotionDto> implements Pr
             "left join tariff_plans on promotions.tariff_id=tariff_plans.id where promotions.status=0 limit ?, ?";
 
     public PromotionDtoDaoImpl(Connection connection) {
-        super(connection, new PromotionDtoRowMapper(new TariffRowMapper()));
+        super(connection, new PromotionDtoRowMapper());
     }
 
     @Override

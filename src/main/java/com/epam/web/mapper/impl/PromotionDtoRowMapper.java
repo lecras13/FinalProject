@@ -17,18 +17,14 @@ import java.util.Date;
 
 public class PromotionDtoRowMapper implements RowMapper<PromotionDto> {
     private static final String ID = "id";
+    private static final String TARIFF_ID = "tariff_id";
+    private static final String TARIFF_NAME = "tariff_name";
     private static final String PROMOTION_NAME = "promotion_name";
     private static final String START_DATE = "start_date";
     private static final String END_DATE = "end_date";
     private static final String DESCRIPTION = "description";
     private static final String NEW_PRICE = "new_price";
     private static final String STATUS = "status";
-
-    private final RowMapper<TariffPlan> tariffRowMapper;
-
-    public PromotionDtoRowMapper(RowMapper<TariffPlan> tariffRowMapper){
-        this.tariffRowMapper = tariffRowMapper;
-    }
 
     /**
      * Assembling an {@link PromotionDto} from the database {@link ResultSet}.
@@ -44,9 +40,11 @@ public class PromotionDtoRowMapper implements RowMapper<PromotionDto> {
         Date startDate = resultSet.getDate(START_DATE);
         Date endDate = resultSet.getDate(END_DATE);
         String description = resultSet.getString(DESCRIPTION);
-        TariffPlan tariffPlan = tariffRowMapper.map(resultSet);
+        Long tariffId = resultSet.getLong(TARIFF_ID);
+        String tariffPlanName = resultSet.getString(TARIFF_NAME);
         Integer newPrice = resultSet.getInt(NEW_PRICE);
-        Boolean block = resultSet.getBoolean(STATUS);
-        return new PromotionDto(id, promotionName, startDate, endDate, description, tariffPlan, newPrice,block);
+        Boolean status = resultSet.getBoolean(STATUS);
+        return new PromotionDto(id, promotionName, startDate, endDate, description, tariffPlanName, tariffId, newPrice, status);
     }
+
 }

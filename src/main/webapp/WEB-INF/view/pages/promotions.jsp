@@ -8,7 +8,6 @@
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="messages"/>
 
-
 <html lang="${sessionScope.lang}">
 <head>
     <title>InternetProvider</title>
@@ -70,11 +69,7 @@
                             </c:choose>
                         </td>
                         <td><c:out value="${promotion.description}"/></td>
-                        <td><c:out value="${promotion.tariffPlan.tariffName}"/>
-                           <%-- <c:out value="${tariffPlan.id}"/>
-                            <c:out value="${promotion.tariffPlan.block}"/>
-                            <c:out value="${promotion.tariffPlan.price}"/>--%>
-                        </td>
+                        <td><c:out value="${promotion.tariffName}"/></td>
                         <td><c:out value="${promotion.newPrice}"/></td>
                         <c:if test="${sessionScope.userRole eq 'ADMIN'}">
                             <td>
@@ -94,7 +89,7 @@
                                     <input type="hidden" name="end_date" value="${promotion.endDate}">
                                     <input type="hidden" name="description" value="${promotion.description}">
                                     <input type="hidden" name="status" value="${promotion.status}">
-                                    <input type="hidden" name="tariff_id" value="<c:out value="${promotion.tariffPlan.id}"/>">
+                                    <input type="hidden" name="tariff_id" value="<c:out value="${promotion.tariffId}"/>">
                                     <input type="hidden" name="new_price" value="${promotion.newPrice}">
                                     <input type="submit" value="<fmt:message key="button.edit"/>">
                                 </form>

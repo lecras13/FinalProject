@@ -31,7 +31,7 @@ public class TariffPlansCommand implements Command {
     private final TariffPlanService tariffPlanService;
     private final PageController pageController;
 
-    public TariffPlansCommand(TariffPlanService service, PageController pageController){
+    public TariffPlansCommand(TariffPlanService service, PageController pageController) {
         this.tariffPlanService = service;
         this.pageController = pageController;
     }
@@ -46,19 +46,21 @@ public class TariffPlansCommand implements Command {
      * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
      */
     @Override
-    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException{
+    public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
         int currentPage = pageController.getCurrentPage(servletRequest);
         List<TariffPlan> tariffPlansForPage;
+        int numberOfRecords;
         HttpSession session = servletRequest.getSession();
         Role mainRole = (Role) session.getAttribute(SESSION_ROLE);
 
         if ((session.getAttribute(SESSION_ROLE) == null) || (mainRole.equals(Role.USER))) {
             tariffPlansForPage = tariffPlanService.getTariffPlansOnlyActiveForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+            numberOfRecords = tariffPlanService.getTariffPlansOnlyActive().size();
         } else {
             tariffPlansForPage = tariffPlanService.getTariffPlansForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+            numberOfRecords = tariffPlanService.getTariffPlans().size();
         }
 
-        int numberOfRecords = tariffPlanService.getTariffPlans().size();
         int numberPages = pageController.getNumberPages(numberOfRecords, RECORDS_ON_PAGE);
 
         servletRequest.setAttribute(NO_OF_PAGES, numberPages);

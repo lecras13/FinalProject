@@ -30,12 +30,10 @@ public class PromotionsCommand implements Command {
     private final static String SESSION_ROLE = "userRole";
 
     private final PromotionDtoService promotionDtoService;
-    private final PromotionService promotionService;
     private final PageController pageController;
 
-    public PromotionsCommand(PromotionDtoService promotionDto, PromotionService promotionService, PageController pageController) {
+    public PromotionsCommand(PromotionDtoService promotionDto, PageController pageController) {
         this.promotionDtoService = promotionDto;
-        this.promotionService = promotionService;
         this.pageController = pageController;
     }
 
@@ -52,16 +50,18 @@ public class PromotionsCommand implements Command {
     public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
         int currentPage = pageController.getCurrentPage(servletRequest);
         List<PromotionDto> promotionDtoList;
+        int numberOfRecords;
         HttpSession session = servletRequest.getSession();
         Role mainRole = (Role) session.getAttribute(SESSION_ROLE);
 
         if ((session.getAttribute(SESSION_ROLE) == null) || (mainRole.equals(Role.USER))) {
             promotionDtoList = promotionDtoService.getPromotionsDtoOnlyActiveForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+            numberOfRecords = promotionDtoService.getPromotionsDtoOnlyActive().size();
         } else {
             promotionDtoList = promotionDtoService.getPromotionsDtoForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+            numberOfRecords = promotionDtoService.getPromotionsDto().size();
         }
 
-        int numberOfRecords = promotionService.getPromotions().size();
         int numberPages = pageController.getNumberPages(numberOfRecords, RECORDS_ON_PAGE);
 
         servletRequest.setAttribute(NO_OF_PAGES, numberPages);

@@ -93,13 +93,6 @@
                                     <input type="hidden" name="new_price" value="${promotion.newPrice}">
                                     <input type="submit" value="<fmt:message key="button.edit"/>">
                                 </form>
-                               <%-- <form action="${pageContext.request.contextPath}/controller?command=promotions-delete"
-                                      method=POST>
-                                    <input type="hidden" name="id" value="${promotion.id}">
-                                    <input type="hidden" name="tariff_id"
-                                           value="<c:out value="${promotion.tariffPlan.id}"/>">
-                                    <input type="submit" value="<fmt:message key="button.delete"/>">
-                                </form>--%>
                             </td>
                         </c:if>
                     </tr>

@@ -1,6 +1,5 @@
 package com.epam.web.service;
 
-import com.epam.web.entity.TariffPlan;
 import com.epam.web.entity.dto.PromotionDto;
 import com.epam.web.exception.ServiceException;
 
@@ -34,4 +33,20 @@ public interface PromotionDtoService {
      * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
      */
     List<PromotionDto> getPromotionsDtoOnlyActiveForPage(int firstRow, int rowCount) throws ServiceException;
+
+    /**
+     * Getting {@link List} promotions only active
+     *
+     * @return found {@link List} promotions only active
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
+    List<PromotionDto> getPromotionsDtoOnlyActive() throws ServiceException;
+
+    /**
+     * Getting {@link List} promotions
+     *
+     * @return found {@link List} promotions
+     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
+     */
+    List<PromotionDto> getPromotionsDto() throws ServiceException;
 }

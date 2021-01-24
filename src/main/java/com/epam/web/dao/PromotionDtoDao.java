@@ -1,6 +1,5 @@
 package com.epam.web.dao;
 
-import com.epam.web.entity.TariffPlan;
 import com.epam.web.entity.dto.PromotionDto;
 import com.epam.web.exception.DaoException;
 
@@ -34,4 +33,20 @@ public interface PromotionDtoDao extends Dao<PromotionDto> {
      * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
      */
     List<PromotionDto> getPromotionsDtoOnlyActiveForPage(int firstRow, int rowCount) throws DaoException;
+
+    /**
+     * Get promotions only active list
+     *
+     * @return found {@link List} of promotions active only
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
+    List<PromotionDto> getPromotionsDtoOnlyActive() throws DaoException;
+
+    /**
+     * Get promotions list
+     *
+     * @return found {@link List} of promotions
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
+    List<PromotionDto> getPromotionsDto() throws DaoException;
 }

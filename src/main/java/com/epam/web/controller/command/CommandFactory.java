@@ -37,12 +37,10 @@ public class CommandFactory {
     private static final String TARIFF_PLANS = "tariffs";
     private static final String TARIFF_PLANS_SAVE = "tariffs-save";
     private static final String TARIFF_PLANS_EDIT = "tariffs-edit";
-    private static final String TARIFF_PLANS_DELETE = "tariffs-delete";
 
     private static final String PROMOTIONS = "promotions";
     private static final String PROMOTIONS_SAVE = "promotions-save";
     private static final String PROMOTIONS_EDIT = "promotions-edit";
-    private static final String PROMOTIONS_DELETE = "promotions-delete";
 
     private static final String PAYMENTS_HISTORY = "payments-history";
     private static final String PAYMENT_PAY = "payment-pay";
@@ -62,17 +60,13 @@ public class CommandFactory {
             case PAYMENT:
                 return new PaymentFormCommand();
 
-            case PROMOTIONS_DELETE:
-                return new PromotionDeleteCommand(new PromotionServiceImpl(new DaoHelperFactory(),new PromotionValidator()));
             case PROMOTIONS_EDIT:
                 return new PromotionEditCommand(new TariffPlanServiceImpl(new DaoHelperFactory(),new TariffPlanValidator()));
             case PROMOTIONS_SAVE:
                 return new PromotionSaveCommand(new PromotionServiceImpl(new DaoHelperFactory(), new PromotionValidator()), new TariffPlanServiceImpl(new DaoHelperFactory(), new TariffPlanValidator()));
             case PROMOTIONS:
-                return new PromotionsCommand(new PromotionDtoServiceImpl(new DaoHelperFactory()), new PromotionServiceImpl(new DaoHelperFactory(), new PromotionValidator()), new PageController());
+                return new PromotionsCommand(new PromotionDtoServiceImpl(new DaoHelperFactory()), new PageController());
 
-            case TARIFF_PLANS_DELETE:
-                return new TariffPlanDeleteCommand(new TariffPlanServiceImpl(new DaoHelperFactory(), new TariffPlanValidator()));
             case TARIFF_PLANS_EDIT:
                 return new TariffPlanEditCommand();
             case TARIFF_PLANS_SAVE:

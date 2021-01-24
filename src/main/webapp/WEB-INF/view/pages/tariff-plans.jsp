@@ -62,11 +62,6 @@
                                     <input type="hidden" name="status" value="${tariff.block}">
                                     <input type="submit" value="<fmt:message key="button.edit"/>">
                                 </form>
-                               <%-- <form action="${pageContext.request.contextPath}/controller?command=tariffs-delete"
-                                      method=POST>
-                                    <input type="hidden" name="tariff_id" value="<c:out value="${tariff.id}"/>"/>
-                                    <input type="submit" value="<fmt:message key="button.delete"/>">
-                                </form>--%>
                             </td>
                         </c:if>
                     </tr>

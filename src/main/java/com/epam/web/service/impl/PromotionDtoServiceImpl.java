@@ -1,7 +1,6 @@
 package com.epam.web.service.impl;
 
 import com.epam.web.dao.PromotionDtoDao;
-import com.epam.web.dao.TariffPlansDao;
 import com.epam.web.dao.helper.DaoHelper;
 import com.epam.web.dao.helper.DaoHelperFactory;
 import com.epam.web.entity.dto.PromotionDto;
@@ -44,6 +43,28 @@ public class PromotionDtoServiceImpl implements PromotionDtoService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             PromotionDtoDao dao = factory.createPromotionDtoDao();
             return dao.getPromotionsDtoOnlyActiveForPage(firstRow, rowCount);
+        } catch (DaoException e) {
+            LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<PromotionDto> getPromotionsDtoOnlyActive() throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            PromotionDtoDao dao = factory.createPromotionDtoDao();
+            return dao.getPromotionsDtoOnlyActive();
+        } catch (DaoException e) {
+            LOGGER.error("Exception tariffPlanService get tariffPlans!");
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<PromotionDto> getPromotionsDto() throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            PromotionDtoDao dao = factory.createPromotionDtoDao();
+            return dao.getPromotionsDto();
         } catch (DaoException e) {
             LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
             throw new ServiceException(e);

@@ -19,5 +19,4 @@ public class PaymentFormCommandTest {
         //then
         Assert.assertEquals(actual, expected);
     }
-
 }

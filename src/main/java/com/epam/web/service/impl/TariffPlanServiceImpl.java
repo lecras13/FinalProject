@@ -60,17 +60,6 @@ public class TariffPlanServiceImpl implements TariffPlanService {
     }
 
     @Override
-    public void deleteTariffPlan(Long id) throws ServiceException {
-        try (DaoHelper factory = daoHelperFactory.create()) {
-            TariffPlansDao dao = factory.createTariffDao();
-            dao.removeById(id);
-        } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService deleting tariffPlan!");
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     public Optional<TariffPlan> getTariffPlanById(Long id) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             TariffPlansDao dao = factory.createTariffDao();

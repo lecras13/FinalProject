@@ -24,7 +24,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void testValidUserDataShouldInvalidByFirstName(){
+    public void testUserDataShouldInvalidByFirstName(){
         //given
         //when
         boolean expected = validator.isValid(INVALID_FIRST_NAME_USER);
@@ -33,7 +33,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void testValidUserDataShouldInvalidByLastName(){
+    public void testUserDataShouldInvalidByLastName(){
         //given
         //when
         boolean expected = validator.isValid(INVALID_LAST_NAME_USER);
@@ -42,7 +42,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void testValidUserDataShouldInvalidByPassword(){
+    public void testUserDataShouldInvalidByPassword(){
         //given
         //when
         boolean expected = validator.isValid(INVALID_PASSWORD_USER);
@@ -51,7 +51,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void testValidUserDataShouldInvalidByDiscount(){
+    public void testUserDataShouldInvalidByDiscount(){
         //given
         //when
         boolean expected = validator.isValid(INVALID_DISCOUNT_USER);

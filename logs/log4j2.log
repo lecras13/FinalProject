@@ -16041,3 +16041,8 @@
 24.01.2021 16:42:47 [http-bio-8087-exec-4] INFO  epam.web.dao.helper.DaoHelper - PromotionDto_HELPER in load
 24.01.2021 16:42:47 [http-bio-8087-exec-4] INFO  epam.web.controller.connection.ConnectionPool - Connection has been given!
 24.01.2021 16:42:47 [http-bio-8087-exec-4] INFO  epam.web.dao.helper.DaoHelper - PromotionDto_HELPER in load
+24.01.2021 23:46:05 [main] ERROR epam.web.service.impl.TariffPlanServiceImpl - Exception tariffPlanService get tariffPlans for a page!
+24.01.2021 23:47:26 [main] ERROR epam.web.service.impl.TariffPlanServiceImpl - Exception tariffPlanService get tariffPlans for a page!
+24.01.2021 23:47:30 [main] ERROR epam.web.service.impl.TariffPlanServiceImpl - Exception tariffPlanService get tariffPlans for a page!
+24.01.2021 23:47:30 [main] ERROR epam.web.service.impl.TariffPlanServiceImpl - Exception tariffPlanService get tariffPlans for a page!
+24.01.2021 23:48:59 [main] ERROR epam.web.service.impl.TariffPlanServiceImpl - Exception tariffPlanService get tariffPlans!

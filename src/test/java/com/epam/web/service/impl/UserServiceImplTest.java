@@ -22,7 +22,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class UserServiceImplTest {
-    private static final Long ID = 1L;
     private static final String LOGIN_ADMIN = "admin";
     private static final String PASSWORD_ADMIN = "admin";
     private static final User ADMIN = new User(1L, "admin", "admin", "Роман", "Александров", Role.ADMIN, 0.0D, false, 0.0D, null, null, 0);

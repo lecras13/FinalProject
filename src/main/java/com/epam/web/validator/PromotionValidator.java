@@ -1,9 +1,6 @@
 package com.epam.web.validator;
 
 import com.epam.web.entity.Promotion;
-import com.epam.web.entity.TariffPlan;
-
-import java.util.Date;
 
 /**
  * The {@code PromotionValidator} represents {@link Promotion} validation.
@@ -15,7 +12,6 @@ public class PromotionValidator implements Validator<Promotion> {
     private static final int MAX_LENGTH = 50;
     private static final int MAX_LENGTH_DESCRIPTION = 255;
     private static final int MAX_AMOUNT = 50;
-    private final Date date = new Date();
 
     /**
      * Check {@link Promotion} for valid.
@@ -36,7 +32,8 @@ public class PromotionValidator implements Validator<Promotion> {
         if ((promotion.getDescription() == null) || (promotion.getDescription().isEmpty() || (promotion.getDescription().length() > MAX_LENGTH_DESCRIPTION))) {
             return false;
         }
-        return (promotion.getStartDate() != null) && (!promotion.getStartDate().after(date));
+
+        return (promotion.getStartDate() != null) && (promotion.getEndDate() != null) && (!promotion.getEndDate().before(promotion.getStartDate()));
     }
 
 }

@@ -62,17 +62,6 @@ public class PromotionServiceImpl implements PromotionService {
     }
 
     @Override
-    public void deletePromotion(Long id) throws ServiceException {
-        try (DaoHelper factory = daoHelperFactory.create()) {
-            PromotionDao dao = factory.createPromotionDao();
-            dao.removeById(id);
-        } catch (DaoException e) {
-            LOGGER.error("Exception promotionService deleting promotion!");
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     public Optional<Promotion> getPromotionById(Long id) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             PromotionDao dao = factory.createPromotionDao();

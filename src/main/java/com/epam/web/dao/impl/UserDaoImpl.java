@@ -21,7 +21,6 @@ import java.util.Optional;
 public class UserDaoImpl extends AbstractDaoPersistent<User> implements UserDao {
     private static final String FIND_BY_LOGIN_AND_PASSWORD = "select * from users where login=? and password=SHA1(?)";
     private static final String TABLE_NAME = "users";
-    private static final String GET_USERS_FOR_TABLE = "SELECT * FROM users limit ?, ?";
     private static final String UPDATE = "UPDATE users SET login=?, password=SHA1(?), first_name=?, last_name=?," +
             " role=?, total_amount=?, status_block=?, traffic=?, discount=?, tariff_id=?, promotion_id=? where id=?";
     private static final String SAVE = "INSERT INTO users(login, password, first_name, last_name, total_amount," +

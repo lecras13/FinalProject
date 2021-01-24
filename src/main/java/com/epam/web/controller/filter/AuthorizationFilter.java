@@ -39,10 +39,8 @@ public class AuthorizationFilter implements Filter {
         adminCommandList.add("logout");
         adminCommandList.add("tariffs-save");
         adminCommandList.add("tariffs-edit");
-        adminCommandList.add("tariffs-delete");
         adminCommandList.add("promotions-save");
         adminCommandList.add("promotions-edit");
-        adminCommandList.add("promotions-delete");
         adminCommandList.add("info");
         adminCommandList.add("payments-history");
         adminCommandList.add("user-edit");

@@ -28,7 +28,6 @@ public class TariffPlanValidator implements Validator<TariffPlan> {
         if ((tariffPlan.getPrice() == null) || (tariffPlan.getPrice() < 0 || (tariffPlan.getPrice() > MAX_AMOUNT))) {
             return false;
         }
-
         return ((tariffPlan.getDescription() == null) || (tariffPlan.getDescription().isEmpty() || tariffPlan.getDescription().length() < MAX_LENGTH_DESCRIPTION));
     }
 }

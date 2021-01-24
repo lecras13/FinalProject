@@ -8,7 +8,7 @@ package com.epam.web.entity;
  */
 
 public enum Role {
-    ADMIN("ADMIN"), USER("USER"), GUEST("GUEST");
+    ADMIN("ADMIN"), USER("USER");
 
     String currency;
 

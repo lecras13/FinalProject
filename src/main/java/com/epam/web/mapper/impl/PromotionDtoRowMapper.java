@@ -1,6 +1,5 @@
 package com.epam.web.mapper.impl;
 
-import com.epam.web.entity.TariffPlan;
 import com.epam.web.entity.dto.PromotionDto;
 import com.epam.web.mapper.RowMapper;
 
@@ -34,7 +33,7 @@ public class PromotionDtoRowMapper implements RowMapper<PromotionDto> {
      * @throws SQLException the sql exception
      */
     @Override
-    public PromotionDto map(ResultSet resultSet) throws SQLException{
+    public PromotionDto map(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong(ID);
         String promotionName = resultSet.getString(PROMOTION_NAME);
         Date startDate = resultSet.getDate(START_DATE);

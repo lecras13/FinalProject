@@ -41,13 +41,6 @@ public interface PromotionService {
     void savePromotion(Long id, String promotionName, Date startDate, Date endDate, String description, Long tariffPlanId, Integer newPrice, Boolean status) throws ServiceException;
 
     /**
-     * Delete the promotion by id
-     *
-     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
-     */
-    void deletePromotion(Long id) throws ServiceException;
-
-    /**
      * Get the promotion by id
      *
      * @param id the current id

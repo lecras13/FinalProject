@@ -48,11 +48,10 @@ public class TariffRowMapper implements RowMapper<TariffPlan> {
      */
 
     public TariffPlan map(ResultSet resultSet, Long tariffId) throws SQLException{
-        Long id = tariffId;
         String tariffName = resultSet.getString(TARIFF_NAME);
         Integer price = resultSet.getInt(PRICE);
         String description = resultSet.getString(DESCRIPTION);
         Boolean block = resultSet.getBoolean(STATUS);
-        return new TariffPlan(id, tariffName, price, description, block);
+        return new TariffPlan(tariffId, tariffName, price, description, block);
     }
 }

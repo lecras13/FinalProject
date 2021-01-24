@@ -34,7 +34,6 @@ public class UserValidator implements Validator<User> {
         if ((user.getLastName() == null) || (user.getLastName().isEmpty()) || (user.getLastName().length() > MAX_LENGTH)) {
             return false;
         }
-
         return (user.getDiscount() != null) && (user.getDiscount() <= 25) && (user.getDiscount() >= 0);
     }
 }

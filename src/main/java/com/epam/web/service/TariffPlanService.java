@@ -45,13 +45,6 @@ public interface TariffPlanService {
     void saveTariffPlan(Long id, String tariffName, Integer price, String description, Boolean status) throws ServiceException;
 
     /**
-     * Delete the tariff plan by id
-     *
-     * @throws ServiceException in case of errors and also in case for checked exceptions of lower application levels
-     */
-    void deleteTariffPlan(Long id) throws ServiceException;
-
-    /**
      * Get the tariff plans list for page
      *
      * @param firstRow row to start to read

@@ -36,7 +36,6 @@ public class PromotionValidator implements Validator<Promotion> {
         if ((promotion.getDescription() == null) || (promotion.getDescription().isEmpty() || (promotion.getDescription().length() > MAX_LENGTH_DESCRIPTION))) {
             return false;
         }
-
         return (promotion.getStartDate() != null) && (!promotion.getStartDate().after(date));
     }
 

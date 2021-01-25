@@ -22,7 +22,6 @@ import java.util.Optional;
  */
 
 public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDao<T> implements DaoPersistent<T> {
-    private static final Logger LOGGER = LogManager.getLogger(AbstractDaoPersistent.class);
     private final static String SELECT_BY_ID = "SELECT * FROM %s WHERE id = ?";
     private final static String SELECT_ALL = "SELECT * FROM %s";
     private final static String DELETE_BY_ID = "DELETE FROM %s WHERE id = ?";
@@ -72,8 +71,7 @@ public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDa
         try (PreparedStatement preparedStatement = createStatement(query, params)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("SQLException when saving parameters!");
-            throw new DaoException();
+            throw new DaoException(e);
         }
     }
 
@@ -104,7 +102,6 @@ public abstract class AbstractDaoPersistent<T extends Entity> extends AbstractDa
         try (PreparedStatement preparedStatement = createStatement(query, id)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("SQLException when removing entity!");
             throw new DaoException(e);
         }
     }

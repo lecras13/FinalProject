@@ -48,6 +48,8 @@ public class TariffPlansCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
         int currentPage = pageController.getCurrentPage(servletRequest);
+        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
+
         List<TariffPlan> tariffPlansForPage;
         int numberOfRecords;
         HttpSession session = servletRequest.getSession();
@@ -60,12 +62,11 @@ public class TariffPlansCommand implements Command {
             tariffPlansForPage = tariffPlanService.getTariffPlansForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
             numberOfRecords = tariffPlanService.getTariffPlans().size();
         }
+        servletRequest.setAttribute(TARIFF_PLANS, tariffPlansForPage);
 
         int numberPages = pageController.getNumberPages(numberOfRecords, RECORDS_ON_PAGE);
-
         servletRequest.setAttribute(NO_OF_PAGES, numberPages);
-        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
-        servletRequest.setAttribute(TARIFF_PLANS, tariffPlansForPage);
+
         return CommandResult.forward(TARIFF_PLANS_PAGE);
     }
 }

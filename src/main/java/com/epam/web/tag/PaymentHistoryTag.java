@@ -1,10 +1,12 @@
 package com.epam.web.tag;
 
 import com.epam.web.entity.Payment;
+import com.epam.web.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -18,7 +20,6 @@ import java.util.List;
  */
 
 public class PaymentHistoryTag extends TagSupport {
-    private static final Logger LOGGER = LogManager.getLogger(PaymentHistoryTag.class);
     private static final String PAYMENTS = "payments";
     private static final String CURRENT_PAGE = "currentPage";
     private static final String TAG_ROW_OPEN = "<tr>";
@@ -33,7 +34,7 @@ public class PaymentHistoryTag extends TagSupport {
      * @return tells the container that it should ignore everything between the start and end tag.
      */
     @Override
-    public int doStartTag() {
+    public int doStartTag() throws JspException {
         ServletRequest servletRequest = pageContext.getRequest();
         SimpleDateFormat simpleDateFormat = dateFormat.transformationDateForLocale(servletRequest);
         List<Payment> paymentList = (List<Payment>) servletRequest.getAttribute(PAYMENTS);
@@ -46,7 +47,7 @@ public class PaymentHistoryTag extends TagSupport {
                 pageContext.getOut().write(TAG_ROW_OPEN + TAG_COLUMN_OPEN + (index + count) + TAG_COLUMN_CLOSE + TAG_COLUMN_OPEN + simpleDateFormat.format(payment.getPaymentDate()) + TAG_COLUMN_CLOSE +
                         TAG_COLUMN_OPEN + payment.getAmount() + TAG_COLUMN_CLOSE + TAG_ROW_CLOSE);
             } catch (IOException e) {
-                LOGGER.error("Error while write out");
+                throw new JspException(e.getMessage());
             }
         }
         return SKIP_BODY;

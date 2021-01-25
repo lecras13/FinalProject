@@ -22,8 +22,6 @@ import java.util.Optional;
  */
 
 public abstract class AbstractDao<T extends Entity> implements Dao<T> {
-    private static final Logger LOGGER = LogManager.getLogger(AbstractDao.class);
-
     private final Connection connection;
     private final RowMapper<T> mapper;
 
@@ -48,7 +46,6 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
             }
             return entities;
         } catch (SQLException e) {
-            LOGGER.error("Error with sqlQueryExecute");
             throw new DaoException(e);
         }
     }

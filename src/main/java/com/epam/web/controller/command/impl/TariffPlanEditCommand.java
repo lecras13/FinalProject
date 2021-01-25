@@ -37,15 +37,18 @@ public class TariffPlanEditCommand implements Command {
     public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse){
         if (servletRequest.getParameter(ID) != null) {
             Long id = Long.parseLong(servletRequest.getParameter(ID));
-            String tariffName = servletRequest.getParameter(TARIFF_NAME);
-            Integer price = Integer.parseInt(servletRequest.getParameter(PRICE));
-            String description = servletRequest.getParameter(DESCRIPTION);
-            String status = servletRequest.getParameter(STATUS);
-
             servletRequest.setAttribute(ID, id);
+
+            String tariffName = servletRequest.getParameter(TARIFF_NAME);
             servletRequest.setAttribute(TARIFF_NAME, tariffName);
+
+            Integer price = Integer.parseInt(servletRequest.getParameter(PRICE));
             servletRequest.setAttribute(PRICE, price);
+
+            String description = servletRequest.getParameter(DESCRIPTION);
             servletRequest.setAttribute(DESCRIPTION, description);
+
+            String status = servletRequest.getParameter(STATUS);
             servletRequest.setAttribute(STATUS, status);
         }
         return CommandResult.forward(TARIFF_EDIT_LOCATION);

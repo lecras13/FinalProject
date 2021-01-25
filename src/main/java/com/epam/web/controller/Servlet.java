@@ -66,7 +66,7 @@ public class Servlet extends HttpServlet {
             CommandResult commandResult = command.execute(servletRequest, servletResponse);
             dispatch(commandResult, servletRequest, servletResponse);
         } catch (Exception e) {
-            LOGGER.error("Error 404");
+            LOGGER.error(e.getMessage(), e);
             servletResponse.sendError(ERROR_404);
         }
     }

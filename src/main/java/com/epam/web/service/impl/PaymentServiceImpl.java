@@ -25,7 +25,6 @@ import java.util.Optional;
  */
 
 public class PaymentServiceImpl implements PaymentService {
-    private static final Logger LOGGER = LogManager.getLogger(PaymentServiceImpl.class);
     private final DaoHelperFactory daoHelperFactory;
     private final Validator<Payment> paymentValidator;
 
@@ -40,7 +39,6 @@ public class PaymentServiceImpl implements PaymentService {
             PaymentDao dao = factory.createPaymentDao();
             return dao.getPaymentsByUserId(id);
         } catch (DaoException e) {
-            LOGGER.error("Exception paymentService get payment!");
             throw new ServiceException(e);
         }
     }
@@ -51,7 +49,6 @@ public class PaymentServiceImpl implements PaymentService {
             PaymentDao dao = factory.createPaymentDao();
             return dao.getPaymentsByUserIdForPage(id, firstRow, rowCount);
         } catch (DaoException e) {
-            LOGGER.error("Exception paymentService get payment for page!");
             throw new ServiceException(e);
         }
     }
@@ -65,8 +62,7 @@ public class PaymentServiceImpl implements PaymentService {
             PaymentDao paymentDao = factory.createPaymentDao();
             Payment payment = new Payment(null, amountToPay, new Date(), userId);
             if (!paymentValidator.isValid(payment)) {
-                LOGGER.warn("Payment not valid!");
-                throw new ServiceException();
+                throw new ServiceException("Not valid payment!");
             }
             paymentDao.save(payment);
 
@@ -79,7 +75,6 @@ public class PaymentServiceImpl implements PaymentService {
             userDao.updateAmount(userId, newAmount);
             factory.endTransaction();
         } catch (DaoException e) {
-            LOGGER.warn("Exception paymentService-pay. Rollback runs!");
             factory.rollback();
             throw new ServiceException(e);
         }

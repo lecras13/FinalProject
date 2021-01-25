@@ -11,13 +11,6 @@ public class ConnectionPoolException extends RuntimeException {
 
     /**
      * Instantiates a new ConnectionPoolException.
-     */
-    public ConnectionPoolException(){
-        super();
-    }
-
-    /**
-     * Instantiates a new ConnectionPoolException.
      *
      * @param message   the throwable message
      * @param cause the throwable

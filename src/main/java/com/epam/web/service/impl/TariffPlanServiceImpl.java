@@ -23,7 +23,6 @@ import java.util.Optional;
  */
 
 public class TariffPlanServiceImpl implements TariffPlanService {
-    private static final Logger LOGGER = LogManager.getLogger(TariffPlanServiceImpl.class);
     private final DaoHelperFactory daoHelperFactory;
     private final Validator<TariffPlan> tariffPlanValidator;
 
@@ -38,7 +37,6 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             TariffPlansDao dao = factory.createTariffDao();
             return dao.getAll();
         } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService get tariffPlans!");
             throw new ServiceException(e);
         }
     }
@@ -49,12 +47,10 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             TariffPlansDao dao = factory.createTariffDao();
             TariffPlan tariffPlan = new TariffPlan(id, tariffName, price, description, status);
             if (!tariffPlanValidator.isValid(tariffPlan)) {
-                LOGGER.error("TariffPlan not valid!");
-                throw new ServiceException();
+                throw new ServiceException("Tariff plan not valid!");
             }
             dao.save(tariffPlan);
         } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService saving tariffPlan!");
             throw new ServiceException(e);
         }
     }
@@ -65,7 +61,6 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             TariffPlansDao dao = factory.createTariffDao();
             return dao.getById(id);
         } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService getting tariffPlan by id!");
             throw new ServiceException(e);
         }
     }
@@ -76,7 +71,6 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             TariffPlansDao dao = factory.createTariffDao();
             return dao.getTariffPlansForPage(firstRow, rowCount);
         } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
             throw new ServiceException(e);
         }
     }
@@ -87,7 +81,6 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             TariffPlansDao dao = factory.createTariffDao();
             return dao.getTariffPlansOnlyActiveForPage(firstRow, rowCount);
         } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
             throw new ServiceException(e);
         }
     }
@@ -98,7 +91,6 @@ public class TariffPlanServiceImpl implements TariffPlanService {
             TariffPlansDao dao = factory.createTariffDao();
             return dao.getTariffPlansOnlyActive();
         } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
             throw new ServiceException(e);
         }
     }

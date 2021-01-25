@@ -22,7 +22,6 @@ import java.util.List;
  */
 
 public class UserDtoServiceImpl implements UserDtoService {
-    private static final Logger LOGGER = LogManager.getLogger(UserDtoServiceImpl.class);
     private final DaoHelperFactory daoHelperFactory;
 
     public UserDtoServiceImpl(DaoHelperFactory daoHelperFactory) {
@@ -35,7 +34,6 @@ public class UserDtoServiceImpl implements UserDtoService {
             UserDtoDao dao = factory.createUserDtoDao();
             return dao.getAllUserDto(firstRow, rowCount);
         } catch (DaoException e) {
-            LOGGER.error("Exception userDtoService get userDto for a page!");
             throw new ServiceException(e);
         }
     }

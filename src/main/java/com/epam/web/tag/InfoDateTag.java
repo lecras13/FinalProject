@@ -19,7 +19,6 @@ import java.util.Date;
  */
 
 public class InfoDateTag extends TagSupport {
-    private static final Logger LOGGER = LogManager.getLogger(InfoDateTag.class);
     private final DateFormatLocale dateFormat = new DateFormatLocale();
 
     /**
@@ -36,7 +35,6 @@ public class InfoDateTag extends TagSupport {
             JspWriter out = pageContext.getOut();
             out.write(simpleDateFormat.format(date));
         } catch (IOException e) {
-            LOGGER.error("IOException in infoTimeTag!");
             throw new JspException(e.getMessage());
         }
         return SKIP_BODY;

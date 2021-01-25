@@ -48,22 +48,27 @@ public class PromotionEditCommand implements Command {
     public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
         if (servletRequest.getParameter(ID) != null) {
             Long id = Long.parseLong(servletRequest.getParameter(ID));
+            servletRequest.setAttribute(ID, id);
 
             String promotionName = servletRequest.getParameter(PROMOTION_NAME);
-            String startDate = servletRequest.getParameter(START_DATE);
-            String endDate = servletRequest.getParameter(END_DATE);
-            String description = servletRequest.getParameter(DESCRIPTION);
-            String tariffId = servletRequest.getParameter(TARIFF_ID);
-            String newPrice = servletRequest.getParameter(NEW_PRICE);
-            String status = servletRequest.getParameter(STATUS);
-
-            servletRequest.setAttribute(ID, id);
             servletRequest.setAttribute(PROMOTION_NAME, promotionName);
+
+            String startDate = servletRequest.getParameter(START_DATE);
             servletRequest.setAttribute(START_DATE, startDate);
+
+            String endDate = servletRequest.getParameter(END_DATE);
             servletRequest.setAttribute(END_DATE, endDate);
+
+            String description = servletRequest.getParameter(DESCRIPTION);
             servletRequest.setAttribute(DESCRIPTION, description);
+
+            String tariffId = servletRequest.getParameter(TARIFF_ID);
             servletRequest.setAttribute(TARIFF_ID, tariffId);
+
+            String newPrice = servletRequest.getParameter(NEW_PRICE);
             servletRequest.setAttribute(NEW_PRICE, newPrice);
+
+            String status = servletRequest.getParameter(STATUS);
             servletRequest.setAttribute(STATUS, status);
         }
         List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlansOnlyActive();

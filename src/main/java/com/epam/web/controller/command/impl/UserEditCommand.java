@@ -57,29 +57,37 @@ public class UserEditCommand implements Command {
         Long id = session.getAttribute(SESSION_ROLE).equals(Role.USER) ?
                 (Long) session.getAttribute(USER_ID) :
                 Long.parseLong(servletRequest.getParameter(ID));
+        servletRequest.setAttribute(ID, id);
 
         String login = servletRequest.getParameter(LOGIN);
-        String firstName = servletRequest.getParameter(FIRST_NAME);
-        String lastName = servletRequest.getParameter(LAST_NAME);
-        Role role = Role.valueOf(servletRequest.getParameter(ROLE));
-        Double totalAmount = Double.parseDouble(servletRequest.getParameter(TOTAL_AMOUNT));
-        String tariffId = servletRequest.getParameter(TARIFF_ID);
-        String promotionId = servletRequest.getParameter(PROMOTION_ID);
-        String statusBlock = servletRequest.getParameter(STATUS_BLOCK);
-        Double traffic = Double.parseDouble(servletRequest.getParameter(TRAFFIC));
-        String discount = servletRequest.getParameter(DISCOUNT);
-
-        servletRequest.setAttribute(ID, id);
         servletRequest.setAttribute(LOGIN, login);
+
+        String firstName = servletRequest.getParameter(FIRST_NAME);
         servletRequest.setAttribute(FIRST_NAME, firstName);
+
+        String lastName = servletRequest.getParameter(LAST_NAME);
         servletRequest.setAttribute(LAST_NAME, lastName);
+
+        Role role = Role.valueOf(servletRequest.getParameter(ROLE));
         servletRequest.setAttribute(ROLE, role);
+
+        Double totalAmount = Double.parseDouble(servletRequest.getParameter(TOTAL_AMOUNT));
         servletRequest.setAttribute(TOTAL_AMOUNT, totalAmount);
-        servletRequest.setAttribute(STATUS_BLOCK, statusBlock);
-        servletRequest.setAttribute(TRAFFIC, traffic);
-        servletRequest.setAttribute(DISCOUNT, discount);
+
+        String tariffId = servletRequest.getParameter(TARIFF_ID);
         servletRequest.setAttribute(TARIFF_ID, tariffId);
+
+        String promotionId = servletRequest.getParameter(PROMOTION_ID);
         servletRequest.setAttribute(PROMOTION_ID, promotionId);
+
+        String statusBlock = servletRequest.getParameter(STATUS_BLOCK);
+        servletRequest.setAttribute(STATUS_BLOCK, statusBlock);
+
+        Double traffic = Double.parseDouble(servletRequest.getParameter(TRAFFIC));
+        servletRequest.setAttribute(TRAFFIC, traffic);
+
+        String discount = servletRequest.getParameter(DISCOUNT);
+        servletRequest.setAttribute(DISCOUNT, discount);
 
         List<TariffPlan> tariffPlans = tariffPlanService.getTariffPlansOnlyActive();
         servletRequest.setAttribute(TARIFF_PLANS, tariffPlans);

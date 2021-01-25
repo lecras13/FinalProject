@@ -49,6 +49,8 @@ public class PromotionsCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
         int currentPage = pageController.getCurrentPage(servletRequest);
+        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
+
         List<PromotionDto> promotionDtoList;
         int numberOfRecords;
         HttpSession session = servletRequest.getSession();
@@ -61,12 +63,11 @@ public class PromotionsCommand implements Command {
             promotionDtoList = promotionDtoService.getPromotionsDtoForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
             numberOfRecords = promotionDtoService.getPromotionsDto().size();
         }
+        servletRequest.setAttribute(PROMOTIONS, promotionDtoList);
 
         int numberPages = pageController.getNumberPages(numberOfRecords, RECORDS_ON_PAGE);
-
         servletRequest.setAttribute(NO_OF_PAGES, numberPages);
-        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
-        servletRequest.setAttribute(PROMOTIONS, promotionDtoList);
+
         return CommandResult.forward(PROMOTIONS_PAGE);
     }
 }

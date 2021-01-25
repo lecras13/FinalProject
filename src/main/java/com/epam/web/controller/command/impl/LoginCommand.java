@@ -78,6 +78,5 @@ public class LoginCommand implements Command {
             return CommandResult.redirect(USERS_PAGE);
         }
         return CommandResult.redirect(INFO_PAGE);
-
     }
 }

@@ -49,6 +49,7 @@ public class PaymentHistoryCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
         int currentPage = pageController.getCurrentPage(servletRequest);
+        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
 
         Long id;
         HttpSession session = servletRequest.getSession();
@@ -57,16 +58,15 @@ public class PaymentHistoryCommand implements Command {
         } else {
             id = Long.parseLong(servletRequest.getParameter(ID));
         }
+        servletRequest.setAttribute(ID, id);
 
         List<Payment> paymentList = paymentService.getPaymentsForPage(id, (currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+        servletRequest.setAttribute(PAYMENTS, paymentList);
 
         int numberOfRecords = paymentService.getPayments(id).size();
         int numberPages = pageController.getNumberPages(numberOfRecords, RECORDS_ON_PAGE);
-
-        servletRequest.setAttribute(ID, id);
         servletRequest.setAttribute(NO_OF_PAGES, numberPages);
-        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
-        servletRequest.setAttribute(PAYMENTS, paymentList);
+
         return CommandResult.forward(PAYMENTS_PAGE);
     }
 }

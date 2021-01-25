@@ -6,8 +6,6 @@ import com.epam.web.dao.*;
 import com.epam.web.dao.impl.*;
 import com.epam.web.exception.DaoException;
 import com.epam.web.exception.ServiceException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 
@@ -19,8 +17,6 @@ import java.sql.SQLException;
  */
 
 public class DaoHelper implements AutoCloseable {
-    private static final Logger LOGGER = LogManager.getLogger(DaoHelper.class);
-
     private final ProxyConnection connection;
 
     public DaoHelper(ConnectionPool pool) {
@@ -33,7 +29,6 @@ public class DaoHelper implements AutoCloseable {
      * @return {@link UserDao} instance
      */
     public UserDao createUserDao() {
-        LOGGER.info("USER_HELPER in load");
         return new UserDaoImpl(connection);
     }
 
@@ -43,7 +38,6 @@ public class DaoHelper implements AutoCloseable {
      * @return {@link TariffPlansDao} instance
      */
     public TariffPlansDao createTariffDao() {
-        LOGGER.info("Tariff_HELPER in load");
         return new TariffPlansDaoImpl(connection);
     }
 
@@ -53,7 +47,6 @@ public class DaoHelper implements AutoCloseable {
      * @return {@link PromotionDao} instance
      */
     public PromotionDao createPromotionDao() {
-        LOGGER.info("Promotion_HELPER in load");
         return new PromotionDaoImpl(connection);
     }
 
@@ -63,7 +56,6 @@ public class DaoHelper implements AutoCloseable {
      * @return {@link PromotionDtoDao} instance
      */
     public PromotionDtoDao createPromotionDtoDao() {
-        LOGGER.info("PromotionDto_HELPER in load");
         return new PromotionDtoDaoImpl(connection);
     }
 
@@ -73,7 +65,6 @@ public class DaoHelper implements AutoCloseable {
      * @return {@link UserDtoDao} instance
      */
     public UserDtoDao createUserDtoDao() {
-        LOGGER.info("PromotionDto_HELPER in load");
         return new UserDtoDaoImpl(connection);
     }
 
@@ -83,7 +74,6 @@ public class DaoHelper implements AutoCloseable {
      * @return {@link PaymentDao} instance
      */
     public PaymentDao createPaymentDao() {
-        LOGGER.info("Promotion_HELPER in load");
         return new PaymentDaoImpl(connection);
     }
 
@@ -104,7 +94,6 @@ public class DaoHelper implements AutoCloseable {
         try {
             connection.setAutoCommit(false);
         } catch (SQLException e) {
-            LOGGER.error("SQLException when starting transaction!");
             throw new DaoException(e);
         }
     }
@@ -118,7 +107,6 @@ public class DaoHelper implements AutoCloseable {
         try {
             connection.rollback();
         } catch (SQLException e) {
-            LOGGER.error("SQLException when starting rollback!");
             throw new ServiceException(e);
         }
     }
@@ -132,7 +120,6 @@ public class DaoHelper implements AutoCloseable {
         try {
             connection.commit();
         } catch (SQLException e) {
-            LOGGER.error("SQLException when starting commit!");
             throw new DaoException(e);
         } finally {
             try {
@@ -140,7 +127,7 @@ public class DaoHelper implements AutoCloseable {
                     connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {
-                LOGGER.error(e.toString());
+                throw new DaoException(e);
             }
         }
     }

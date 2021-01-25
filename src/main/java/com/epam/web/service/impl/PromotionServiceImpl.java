@@ -24,7 +24,6 @@ import java.util.Optional;
  */
 
 public class PromotionServiceImpl implements PromotionService {
-    private static final Logger LOGGER = LogManager.getLogger(PromotionServiceImpl.class);
     private final DaoHelperFactory daoHelperFactory;
     private final Validator<Promotion> promotionValidator;
 
@@ -40,7 +39,6 @@ public class PromotionServiceImpl implements PromotionService {
             PromotionDao dao = factory.createPromotionDao();
             return dao.getAll();
         } catch (DaoException  e) {
-            LOGGER.error("Exception promotionService get promotions!");
             throw new ServiceException(e);
         }
     }
@@ -51,12 +49,10 @@ public class PromotionServiceImpl implements PromotionService {
             PromotionDao dao = factory.createPromotionDao();
             Promotion promotion = new Promotion(id, promotionName, startDate, endDate, description, tariffPlanId, newPrice, status);
             if (!promotionValidator.isValid(promotion)) {
-                LOGGER.error("Promotion not valid!");
-                throw new ServiceException();
+                throw new ServiceException("Promotion not valid!");
             }
             dao.save(promotion);
         } catch (DaoException e) {
-            LOGGER.error("Exception promotionService saving promotion!");
             throw new ServiceException(e);
         }
     }
@@ -67,7 +63,6 @@ public class PromotionServiceImpl implements PromotionService {
             PromotionDao dao = factory.createPromotionDao();
             return dao.getById(id);
         } catch (DaoException e) {
-            LOGGER.error("Exception promotionService get promotion by id!");
             throw new ServiceException(e);
         }
     }

@@ -20,7 +20,6 @@ import java.util.List;
  */
 
 public class PromotionDtoServiceImpl implements PromotionDtoService {
-    private static final Logger LOGGER = LogManager.getLogger(PromotionDtoServiceImpl.class);
     private final DaoHelperFactory daoHelperFactory;
 
     public PromotionDtoServiceImpl(DaoHelperFactory daoHelperFactory) {
@@ -33,7 +32,6 @@ public class PromotionDtoServiceImpl implements PromotionDtoService {
             PromotionDtoDao dao = factory.createPromotionDtoDao();
             return dao.getAllPromotionDtoForPage(firstRow, rowCount);
         } catch (DaoException e) {
-            LOGGER.error("Exception promotionDtoService get promotions!");
             throw new ServiceException(e);
         }
     }
@@ -44,7 +42,6 @@ public class PromotionDtoServiceImpl implements PromotionDtoService {
             PromotionDtoDao dao = factory.createPromotionDtoDao();
             return dao.getPromotionsDtoOnlyActiveForPage(firstRow, rowCount);
         } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
             throw new ServiceException(e);
         }
     }
@@ -55,7 +52,6 @@ public class PromotionDtoServiceImpl implements PromotionDtoService {
             PromotionDtoDao dao = factory.createPromotionDtoDao();
             return dao.getPromotionsDtoOnlyActive();
         } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService get tariffPlans!");
             throw new ServiceException(e);
         }
     }
@@ -66,7 +62,6 @@ public class PromotionDtoServiceImpl implements PromotionDtoService {
             PromotionDtoDao dao = factory.createPromotionDtoDao();
             return dao.getPromotionsDto();
         } catch (DaoException e) {
-            LOGGER.error("Exception tariffPlanService get tariffPlans for a page!");
             throw new ServiceException(e);
         }
     }

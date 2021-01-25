@@ -22,7 +22,6 @@ import java.util.Optional;
  */
 
 public class UserServiceImpl implements UserService {
-    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
     private final DaoHelperFactory daoHelperFactory;
 
     public UserServiceImpl(DaoHelperFactory daoHelperFactory) {
@@ -34,7 +33,6 @@ public class UserServiceImpl implements UserService {
             UserDao dao = factory.createUserDao();
             return dao.findUserByLoginAndPassword(login, password);
         } catch (DaoException e) {
-            LOGGER.error("Exception userService getting login!");
             throw new ServiceException(e);
         }
     }
@@ -44,7 +42,6 @@ public class UserServiceImpl implements UserService {
             UserDao dao = factory.createUserDao();
             dao.changePasswordByUserId(id, password);
         } catch (DaoException e) {
-            LOGGER.error("Exception userService changing password!");
             throw new ServiceException(e);
         }
     }
@@ -54,7 +51,6 @@ public class UserServiceImpl implements UserService {
             UserDao dao = factory.createUserDao();
             return dao.getAll();
         } catch (DaoException e) {
-            LOGGER.error("Exception userService getting all users!");
             throw new ServiceException(e);
         }
     }
@@ -64,7 +60,6 @@ public class UserServiceImpl implements UserService {
             UserDao dao = factory.createUserDao();
             return dao.getById(id);
         } catch (DaoException e) {
-            LOGGER.error("Exception userService getting user by id!");
             throw new ServiceException(e);
         }
     }
@@ -75,7 +70,6 @@ public class UserServiceImpl implements UserService {
             UserDao dao = factory.createUserDao();
             dao.save(user);
         } catch (DaoException e) {
-            LOGGER.error("Exception userService saving user!");
             throw new ServiceException(e);
         }
     }
@@ -86,7 +80,6 @@ public class UserServiceImpl implements UserService {
             UserDao dao = factory.createUserDao();
             dao.updateUserByAdmin(params);
         } catch (DaoException e) {
-            LOGGER.error("Exception userService updating user by admin!");
             throw new ServiceException(e);
         }
     }
@@ -97,7 +90,6 @@ public class UserServiceImpl implements UserService {
             UserDao dao = factory.createUserDao();
             dao.updateUserByUser(params);
         } catch (DaoException e) {
-            LOGGER.error("Exception userService updating user by user!");
             throw new ServiceException(e);
         }
     }

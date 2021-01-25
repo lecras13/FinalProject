@@ -49,14 +49,15 @@ public class UsersCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServiceException {
         int currentPage = pageController.getCurrentPage(servletRequest);
+        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
+
         List<UserDto> userDtoList = userDtoService.getUserDtoForPage((currentPage - 1) * RECORDS_ON_PAGE, RECORDS_ON_PAGE);
+        servletRequest.setAttribute(USERS, userDtoList);
 
         int numberOfRecords = userService.getAllUsers().size();
         int numberPages = pageController.getNumberPages(numberOfRecords, RECORDS_ON_PAGE);
-
         servletRequest.setAttribute(NO_OF_PAGES, numberPages);
-        servletRequest.setAttribute(CURRENT_PAGE, currentPage);
-        servletRequest.setAttribute(USERS, userDtoList);
+
         return CommandResult.forward(USERS_PAGE);
     }
 }

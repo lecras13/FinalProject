@@ -19,4 +19,10 @@ public class ConnectionPoolException extends RuntimeException {
         super(message, cause);
     }
 
+    /**
+     * Instantiates a new ConnectionPoolException.
+     */
+    public ConnectionPoolException(){
+        super();
+    }
 }

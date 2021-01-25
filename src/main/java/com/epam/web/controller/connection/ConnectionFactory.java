@@ -1,11 +1,14 @@
 package com.epam.web.controller.connection;
 
+import com.epam.web.exception.ConnectionPoolException;
 import com.epam.web.exception.DaoException;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.util.Properties;
 
 /**
  * The {@code ConnectionFactory} establishes a connection to the database.
@@ -15,7 +18,7 @@ import java.util.ResourceBundle;
  */
 
 public class ConnectionFactory {
-    private final static String DB = "database";
+    private final static String DB = "database.properties";
     private final static String DB_URL = "db.url";
     private final static String DB_USER = "db.user";
     private final static String DB_PASSWORD = "db.password";
@@ -25,10 +28,10 @@ public class ConnectionFactory {
 
 
     ConnectionFactory() {
-        ResourceBundle resource = ResourceBundle.getBundle(DB);
-        url = resource.getString(DB_URL);
-        user = resource.getString(DB_USER);
-        pass = resource.getString(DB_PASSWORD);
+        Properties properties = getProperties();
+        url = properties.getProperty(DB_URL);
+        user = properties.getProperty(DB_USER);
+        pass = properties.getProperty(DB_PASSWORD);
     }
 
     /**
@@ -43,5 +46,24 @@ public class ConnectionFactory {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
+    }
+
+    /**
+     * Reading properties to connection to database
+     *
+     * @return properties connection to database
+     * @throws ConnectionPoolException in case of errors with reading properties db
+     */
+    private Properties getProperties() throws ConnectionPoolException {
+        Properties properties = new Properties();
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(DB)) {
+            if (input == null) {
+                throw new ConnectionPoolException();
+            }
+            properties.load(input);
+        } catch (IOException e) {
+            throw new ConnectionPoolException(e.getMessage(), e);
+        }
+        return properties;
     }
 }

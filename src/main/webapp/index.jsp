@@ -20,20 +20,6 @@
     <jsp:include page="WEB-INF/view/template/header.jsp"/>
 </header>
 <div id="all-page">
-
-    <nav>
-        <c:if test="${sessionScope.userRole eq 'ADMIN'}">
-            <div>
-                <jsp:include page="WEB-INF/view/template/admin.jsp"/>
-            </div>
-        </c:if>
-        <c:if test="${sessionScope.userRole eq 'USER'}">
-            <div>
-                <jsp:include page="WEB-INF/view/template/user.jsp"/>
-            </div>
-        </c:if>
-    </nav>
-
     <div class="content">
         <hr/>
         <a><ctg:info-time/></a>

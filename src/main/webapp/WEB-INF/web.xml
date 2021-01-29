@@ -8,7 +8,7 @@
 
     <servlet>
         <servlet-name>main</servlet-name>
-        <servlet-class>com.epam.web.controller.Servlet</servlet-class>
+        <servlet-class>com.epam.internetprovider.controller.Servlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -29,7 +29,7 @@
 
     <filter>
         <filter-name>EncodingFilter</filter-name>
-        <filter-class>com.epam.web.controller.filter.EncodingFilter</filter-class>
+        <filter-class>com.epam.internetprovider.controller.filter.EncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -42,7 +42,7 @@
 
     <filter>
         <filter-name>language</filter-name>
-        <filter-class>com.epam.web.controller.filter.SessionLocaleFilter</filter-class>
+        <filter-class>com.epam.internetprovider.controller.filter.SessionLocaleFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -52,7 +52,7 @@
 
     <filter>
         <filter-name>authorization</filter-name>
-        <filter-class>com.epam.web.controller.filter.AuthorizationFilter</filter-class>
+        <filter-class>com.epam.internetprovider.controller.filter.AuthorizationFilter</filter-class>
     </filter>
 
     <filter-mapping>

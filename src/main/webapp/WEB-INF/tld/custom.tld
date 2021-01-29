@@ -13,13 +13,13 @@
 
     <tag>
         <name>info-time</name>
-        <tag-class>com.epam.web.tag.InfoDateTag</tag-class>
+        <tag-class>com.epam.internetprovider.tag.InfoDateTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
     <tag>
         <name>payment-history</name>
-        <tag-class>com.epam.web.tag.PaymentHistoryTag</tag-class>
+        <tag-class>com.epam.internetprovider.tag.PaymentHistoryTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>

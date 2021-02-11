@@ -28,6 +28,14 @@ public class UserDtoDaoImpl extends AbstractDao<UserDto> implements UserDtoDao {
         super(connection, new UserDtoRowMapper(new TariffRowMapper(), new PromotionRowMapper()));
     }
 
+    /**
+     * Get the user dto list for page
+     *
+     * @param firstRow row to start to read
+     * @param rowCount count rows for page
+     * @return found {@link List} of user dto for page
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public List<UserDto> getAllUserDto(int firstRow, int rowCount) throws DaoException {
         return executeQuery(GET_ALL_USER_DTO, firstRow, rowCount);

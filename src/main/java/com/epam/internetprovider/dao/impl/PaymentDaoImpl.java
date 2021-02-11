@@ -29,10 +29,26 @@ public class PaymentDaoImpl extends AbstractDaoPersistent<Payment> implements Pa
         super(connection, new PaymentRowMapper(), new PaymentExtractor(), TABLE_NAME, SAVE, UPDATE);
     }
 
+    /**
+     * Get the payments list by user id
+     *
+     * @param id the current user id
+     * @return found {@link List} of payments for current user
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     public List<Payment> getPaymentsByUserId(Long id) throws DaoException {
         return executeQuery(GET_PAYMENTS_BY_USER_ID, id);
     }
 
+    /**
+     * Get the payments list by user id for page
+     *
+     * @param id the current user id
+     * @param firstRow row to start to read
+     * @param rowCount count rows for page
+     * @return found {@link List} of payments for current user for page
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public List<Payment> getPaymentsByUserIdForPage(Long id, int firstRow, int rowCount) throws DaoException {
         return executeQuery(GET_PAYMENTS_BY_USER_ID_FOR_PAGE, id, firstRow, rowCount);

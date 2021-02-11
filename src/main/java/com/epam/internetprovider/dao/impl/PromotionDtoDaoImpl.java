@@ -31,21 +31,48 @@ public class PromotionDtoDaoImpl extends AbstractDao<PromotionDto> implements Pr
         super(connection, new PromotionDtoRowMapper());
     }
 
+    /**
+     * Get the promotions list for page
+     *
+     * @param firstRow row to start to read
+     * @param rowCount count rows for page
+     * @return found {@link List} of promotions for page
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public List<PromotionDto> getAllPromotionDtoForPage(int firstRow, int rowCount) throws DaoException {
         return executeQuery(GET_ALL_PROMOTION_DTO_FOR_PAGE,firstRow, rowCount);
     }
 
+    /**
+     * Get the promotions only active list for page
+     *
+     * @param firstRow row to start to read
+     * @param rowCount count rows for page
+     * @return found {@link List} of promotions for page
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public List<PromotionDto> getPromotionsDtoOnlyActiveForPage(int firstRow, int rowCount) throws DaoException {
         return executeQuery(GET_ALL_ACTIVE_PROMOTION_DTO_FOR_PAGE, firstRow, rowCount);
     }
 
+    /**
+     * Get promotions only active list
+     *
+     * @return found {@link List} of promotions active only
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public List<PromotionDto> getPromotionsDtoOnlyActive() throws DaoException {
         return executeQuery(GET_ALL_ACTIVE_PROMOTION_DTO);
     }
-
+    /**
+     * Get promotions list
+     *
+     * @return found {@link List} of promotions
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public List<PromotionDto> getPromotionsDto() throws DaoException {
         return executeQuery(GET_ALL_PROMOTION_DTO);

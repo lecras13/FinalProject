@@ -29,16 +29,38 @@ public class TariffPlansDaoImpl extends AbstractDaoPersistent<TariffPlan> implem
         super(connection, new TariffRowMapper(), new TariffPlanExtractor(), TABLE_NAME, SAVE, UPDATE);
     }
 
+    /**
+     * Get the tariff plans list for page
+     *
+     * @param firstRow row to start to read
+     * @param rowCount count rows for page
+     * @return found {@link List} of tariff plans for page
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public List<TariffPlan> getTariffPlansForPage(int firstRow, int rowCount) throws DaoException {
         return executeQuery(GET_FOR_TABLE, firstRow, rowCount);
     }
 
+    /**
+     * Get the tariff plans only active list for page
+     *
+     * @param firstRow row to start to read
+     * @param rowCount count rows for page
+     * @return found {@link List} of tariff plans for page
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public List<TariffPlan> getTariffPlansOnlyActiveForPage(int firstRow, int rowCount) throws DaoException {
         return executeQuery(GET_FOR_TABLE_ACTIVE, firstRow, rowCount);
     }
 
+    /**
+     * Get tariff plans only active list
+     *
+     * @return found {@link List} of tariff plans active only
+     * @throws DaoException in case of errors and also in case for checked exceptions of lower application levels
+     */
     @Override
     public List<TariffPlan> getTariffPlansOnlyActive() throws DaoException {
         return executeQuery(GET_ACTIVE);
